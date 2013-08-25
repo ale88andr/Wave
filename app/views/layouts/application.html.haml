@@ -15,6 +15,7 @@
     = csrf_meta_tags
 
   %body{id: params[:controller] << '_controller'}
+    = render 'common/header'
 
     = yield
 
