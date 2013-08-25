@@ -1,0 +1,21 @@
+!!!
+%html
+  /[if lt IE 7]   %html.no-js lt-ie9 lt-ie8 lt-ie7
+  /[if IE 7]      %html.no-js lt-ie9 lt-ie8
+  /[if IE 8]      %html.no-js lt-ie9
+  /[if gt IE 8]   %html.no-js
+  %head
+    %meta{ charset: Rails.application.config.encoding }
+    %meta{ name: "viewport", content: "width=device-width, initial-scale=1.0" }
+
+    %title= content_for?(:title) ? yield(:title) : "Untitled"
+
+    = stylesheet_link_tag    "application"
+    = javascript_include_tag "vendor/custom.modernizr"
+    = csrf_meta_tags
+
+  %body{id: params[:controller] << '_controller'}
+
+    = yield
+
+    = javascript_include_tag "application"
