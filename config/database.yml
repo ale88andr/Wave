@@ -15,3 +15,6 @@ test: &test
 production:
   database: db/production.sqlite3
   <<: *defaults
+
+cucumber:
+  <<: *test
