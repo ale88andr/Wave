@@ -28,8 +28,6 @@ end
 gem 'jquery-rails'
 gem 'json'
 
-gem 'jquery-rails'
-
 # media
 gem 'carrierwave'
 gem 'mini_magick', '3.5.0'
