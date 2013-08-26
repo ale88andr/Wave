@@ -1,0 +1,25 @@
+Feature: User registration
+
+  In order to be a registered user
+  A guest user
+  Should fill in registration form
+
+  Scenario: Enter to register form
+    Given I am a guest user
+    And I should see a link to registration form
+    When I click to the register link
+    Then I should see empty form
+    And links to sign in, password forgot menu
+
+  Scenario: User filling form with valid data
+    Given I am a guest user visiting registration form
+    When I filing registration form with valid data
+    Then I click on sign up button and should be added to site database
+    And I should be redirected to home page with success notice
+
+  Scenario: User filling form with invalid data
+    Given I am a guest user visiting registration form
+    When I filing registration form with invalid data
+    Then I click on sign up button and should not be added to database
+    And I should be redirected to register page with error
+    But Form fields should be fill in with values

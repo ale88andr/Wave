@@ -4,3 +4,11 @@
       %h1= link_to 'Wave', root_path
     %li.toggle-topbar.menu-icon
       = link_to 'Меню', '#'
+  %section.top-bar-section
+    %ul.right
+      - if user_signed_in?
+        %li= "Здраствуйте, #{current_user.name}"
+        %li= link_to "Выйти", destroy_user_session_path
+      -else
+        %li= link_to "Регистрация", new_user_registration_path
+        %li= link_to "Войти", new_user_session_path

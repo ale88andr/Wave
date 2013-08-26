@@ -15,6 +15,9 @@ Spork.prefork do
     # ## Mock Framework
     config.mock_with :rspec
 
+    # Devise
+    config.include Devise::TestHelpers, :type => :controller
+
     config.fixture_path = "#{::Rails.root}/spec/fixtures"
     config.use_transactional_fixtures = true
     config.infer_base_class_for_anonymous_controllers = false
@@ -27,17 +30,17 @@ Spork.prefork do
     config.include Capybara::DSL
 
     #Database cleaner
-    config.before(:suite) do
-      DatabaseCleaner.strategy = :truncation
-    end
+    # config.before(:suite) do
+    #   DatabaseCleaner.strategy = :truncation
+    # end
 
-    config.before(:each) do
-      DatabaseCleaner.start
-    end
+    # config.before(:each) do
+    #   DatabaseCleaner.start
+    # end
 
-    config.after(:each) do
-      DatabaseCleaner.clean
-    end
+    # config.after(:each) do
+    #   DatabaseCleaner.clean
+    # end
   end
 end
 

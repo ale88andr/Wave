@@ -1,0 +1,25 @@
+ru:
+  activerecord:
+    errors:
+      models:
+        user:
+          attributes:
+            email:
+              blank: "Поле 'email' необходимо заполнить."
+            name:
+              blank: "Поле 'Имя пользователя' необходимо заполнить."
+            password:
+              blank: "Поле 'Пароль' необходимо заполнить."
+  devise:
+    registrations:
+      new:
+        name: "Ваше Имя :"
+        email: "Ваш Email :"
+        password: "Придумайте пароль :"
+        password_confirmation: "Повторите пароль :"
+        register: "Присоединиться"
+    shared:
+      links:
+        sign_in: "Войти"
+        sign_up: "Регистрация"
+        forgot_password: "Забыли свой пароль?"
