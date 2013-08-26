@@ -1,16 +1,18 @@
-%h2 Sign in
-= form_for(resource, :as => resource_name, :url => session_path(resource_name)) do |f|
-  %div
-    = f.label :email
-    %br/
-    = f.email_field :email, :autofocus => true
-  %div
-    = f.label :password
-    %br/
-    = f.password_field :password
-  - if devise_mapping.rememberable?
-    %div
-      = f.check_box :remember_me
-      = f.label :remember_me
-  %div= f.submit "Sign in"
-= render "devise/shared/links"
+.large-5.large-centered.columns
+  %h2 Вход в аккаунт
+  = form_for(resource, :as => resource_name, :url => session_path(resource_name)) do |f|
+    .row.collapse
+      .small-4.large-3.columns
+        %span.prefix= f.label :name, t('.name')
+      .small-8.large-9.columns
+        = f.text_field :name, :autofocus => true, placeholder: t('.ph_name')
+      .small-4.large-3.columns
+        %span.prefix= f.label :password, t('.password')
+      .small-8.large-9.columns
+        = f.password_field :password, placeholder: t('.ph_pass')
+      - if devise_mapping.rememberable?
+        %div
+          = f.check_box :remember_me
+          = f.label :remember_me
+      %div= f.submit "Войти", class: "button radius large-5"
+  = render "devise/shared/links"

@@ -86,3 +86,81 @@ But /^Form fields should be fill in with values$/ do
   end
 end
 # --end Scenario: User filling form with invalid data
+
+# Scenario: Enter to sign in form
+Given /^I am a register user$/ do
+  @user_with_account = FactoryGirl.create(:valid_user)
+  visit root_path
+end
+
+And /^I should see a link to sign in form$/ do
+  page.should have_link("Войти")
+end
+
+When /^I click to the sign in link$/ do
+  page.click_link("Войти")
+  expect(current_path).to eq new_user_session_path
+end
+
+Then /^I should see form$/ do
+  expect(page).to have_content "Вход в аккаунт"
+  within '#new_user' do
+    expect(page.find_field('user[name]')).not_to be_nil
+    expect(page.find_field('user[password]')).not_to be_nil
+    expect(page.find_button('Войти')).not_to be_nil
+  end
+end
+
+And /^links to sign up, password forgot menu$/ do
+  expect(page).to have_link "Регистрация"
+  expect(page).to have_link "Забыли свой пароль?"
+end
+# --end Scenario: Enter to sign in form
+
+# Scenario: User account exists
+Given /^I am a register user visiting sign in form$/ do
+  step "I am a register user"
+  step "I should see a link to sign in form"
+  step "I click to the sign in link"
+end
+
+When /^I filing sign in form with valid data$/ do
+  within '#new_user' do
+    fill_in('user[name]', with: @user_with_account.name)
+    fill_in('user[password]', with: @user_with_account.password)
+  end
+end
+
+Then /^I click on sign in button be redirected to home page with success notice$/ do
+  click_button("Войти")
+  expect(current_path).to eq root_path
+end
+
+And /^I should and should be entered in my account$/ do
+  expect(page).to have_content @user_with_account[:name]
+end
+# --end Scenario: User account exists
+
+# Scenario: User does not have account
+Given /^I am a guest user visiting sign in form$/ do
+  step "I am a guest user"
+  step "I should see a link to sign in form"
+  step "I click to the sign in link"
+end
+
+When /^I filing sign in form with invalid data$/ do
+  within '#new_user' do
+    fill_in('user[name]', with: "non_existing_user_name")
+    fill_in('user[password]', with: "")
+  end
+end
+
+Then /^I click on sign in button and should not be enter in account$/ do
+  click_button("Войти")
+  expect(page).not_to have_content "non_existing_user_name"
+end
+
+And /^I should be redirected to sign in form with error$/ do
+  expect(current_path).to eq new_user_session_path
+end
+# --end Scenario: User does not have account

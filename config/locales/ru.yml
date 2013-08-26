@@ -18,8 +18,19 @@ ru:
         password: "Придумайте пароль :"
         password_confirmation: "Повторите пароль :"
         register: "Присоединиться"
+        ph_name: "Введите имя"
+        ph_email: "Введите email"
+        ph_pass: "Введите пароль"
+        ph_pass_confirm: "Повторите пароль"
     shared:
       links:
         sign_in: "Войти"
         sign_up: "Регистрация"
         forgot_password: "Забыли свой пароль?"
+    sessions:
+      new:
+        name: "Ваше Имя :"
+        password: "Ваш пароль :"
+        ph_name: "Введите имя"
+        ph_pass: "Введите пароль"
+

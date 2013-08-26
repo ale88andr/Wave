@@ -6,20 +6,21 @@
       .small-4.large-3.columns
         %span.prefix= f.label :name, t('.name')
       .small-8.large-9.columns
-        = f.text_field :name, :autofocus => true
+        = f.text_field :name, :autofocus => true, placeholder: t('.ph_name')
       .small-4.large-3.columns
         %span.prefix= f.label :email, t('.email')
       .small-8.large-9.columns
-        = f.email_field :email
+        = f.email_field :email, placeholder: t('.ph_email')
       .small-4.large-3.columns
         %span.prefix= f.label :password, t('.password')
       .small-8.large-9.columns
-        = f.password_field :password
+        = f.password_field :password, placeholder: t('.ph_pass')
       .small-4.large-3.columns
         %span.prefix= f.label :password_confirmation, t('.password_confirmation')
       .small-8.large-9.columns
-        = f.password_field :password_confirmation
+        = f.password_field :password_confirmation, placeholder: t('.ph_pass_confirm')
       %br/
       %div= f.submit t('.register'), class: "button radius success"
-    = render "devise/shared/links"
+    .sub-nav
+      = render "devise/shared/links"
 %br/

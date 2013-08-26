@@ -1,0 +1,24 @@
+Feature: User sign in
+
+  In order to enter in account
+  A register user
+  Should fill in sign in form
+
+  Scenario: Enter to sign in form
+    Given I am a register user
+    And I should see a link to sign in form
+    When I click to the sign in link
+    Then I should see form
+    And links to sign up, password forgot menu
+
+  Scenario: User account exists
+    Given I am a register user visiting sign in form
+    When I filing sign in form with valid data
+    Then I click on sign in button be redirected to home page with success notice
+    And I should and should be entered in my account
+
+  Scenario: User does not have account
+    Given I am a guest user visiting sign in form
+    When I filing sign in form with invalid data
+    Then I click on sign in button and should not be enter in account
+    And I should be redirected to sign in form with error
