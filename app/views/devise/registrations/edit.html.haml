@@ -1,5 +1,4 @@
-%h2
-  Edit #{resource_name.to_s.humanize}
+%h2.subheader= "Редактирование профиля #{current_user.name}"
 = form_for(resource, :as => resource_name, :url => registration_path(resource_name), :html => { :method => :put }) do |f|
   = devise_error_messages!
   %div
@@ -9,6 +8,10 @@
   - if devise_mapping.confirmable? && resource.pending_reconfirmation?
     %div
       Currently waiting confirmation for: #{resource.unconfirmed_email}
+  %div
+    = f.label :name, t('.name')
+    %br/
+    = f.text_field :name
   %div
     = f.label :password
     %i (leave blank if you don't want to change it)
@@ -23,8 +26,10 @@
     %i (we need your current password to confirm your changes)
     %br/
     = f.password_field :current_password
-  %div= f.submit "Update"
-%h3 Cancel my account
+    %br/
+    = render partial: "profiles/form", locals: { form: f }
+  %div= f.submit "Обновить данные", class: "button radius success"
+%h3.subheader Отмена аккаунта
 %p
-  Unhappy? #{button_to "Cancel my account", registration_path(resource_name), :data => { :confirm => "Are you sure?" }, :method => :delete}
-= link_to "Back", :back
+  Недовальны? #{button_to "Удалить мой аккаунт", registration_path(resource_name), :data => { :confirm => "Вы уверенны?" }, :method => :delete, class: "button radius alert"}
+= link_to "Назад", :back

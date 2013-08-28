@@ -30,6 +30,21 @@ class User < ActiveRecord::Base
   has_one :profile
   accepts_nested_attributes_for :profile
 
+  delegate  :show_email,
+            :birthday,
+            :country,
+            :gender,
+            :about,
+            :signature,
+            :contacts_url,
+            :contacts_other,
+            :contacts_skype,
+            :contacts_phone,
+            :time_zone,
+            :dispatch,
+            :avatar,
+            :to => :profile
+
   validates :name, presence: { message: "Имя пользователя должно быть заполненно!" }, uniqueness:{ case_sensitive: false, message:" - В нашей базе уже есть такое имя, придумайте пожалуйсто другое!" }, length:{maximum:50, too_long:" - Слишком длинное имя, Вам следует придумать что-нибудь покороче"}
   VALID_EMAIL_FORMAT = /\A[\w+\-.]+@[a-z\d\-.]+\.[a-z]+\z/i
   validates :email, uniqueness: { case_sensitive: false, message: " - В нашей базе уже есть такой email, укажите пожалуйсто другое!" }, format:{with:VALID_EMAIL_FORMAT, message:" - Это поле должно иметь следующий формат: examle@mail.com"}

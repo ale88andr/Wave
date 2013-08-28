@@ -1,7 +1,7 @@
 %a.button.radius.additional-info Показать/Скрыть дополнительные сведения
 .profile.hidden
   %h3.subheader Дополнительная информация :
-  = form.fields_for :profile do |profile_f|
+  = form.fields_for :profile, :html => {:multipart => true} do |profile_f|
     .row.collapse
       .small-4.large-4.columns
         = profile_f.check_box :show_email
@@ -34,27 +34,27 @@
       .small-4.large-3.columns
         %span.prefix= profile_f.label :contacts_phone
       .small-8.large-9.columns
-        = profile_f.password_field :contacts_phone
+        = profile_f.text_field :contacts_phone
     .row.collapse
       .small-4.large-3.columns
         %span.prefix= profile_f.label :contacts_skype
       .small-8.large-9.columns
-        = profile_f.password_field :contacts_skype
+        = profile_f.text_field :contacts_skype
     .row.collapse
       .small-4.large-3.columns
         %span.prefix= profile_f.label :contacts_other
       .small-8.large-9.columns
-        = profile_f.password_field :contacts_other
+        = profile_f.text_field :contacts_other
     .row.collapse
       .small-4.large-3.columns
         %span.prefix= profile_f.label :contacts_url
       .small-8.large-9.columns
-        = profile_f.password_field :contacts_url
+        = profile_f.text_field :contacts_url
     .row.collapse
       .small-4.large-3.columns
         %span.prefix= profile_f.label :time_zone
       .small-8.large-9.columns
-        = profile_f.password_field :time_zone
+        = profile_f.text_field :time_zone
     .row.collapse
       .large-2.small-2.columns
         Получать рассылку?
@@ -64,7 +64,8 @@
           = profile_f.radio_button(:dispatch, false)
           = profile_f.label(:dispatch_no, "Нет")
     .row.collapse
+      = image_tag(@user.profile.avatar_url) if @user.profile.avatar?
       .small-4.large-3.columns
         %span.prefix= profile_f.label :avatar
       .small-8.large-9.columns
-        = profile_f.password_field :avatar
+        = profile_f.file_field :avatar

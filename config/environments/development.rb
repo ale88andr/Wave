@@ -37,4 +37,6 @@ Wave::Application.configure do
 
   # Devise
   config.action_mailer.default_url_options = { :host => 'localhost:3000' }
+  config.delete_tmp_file_after_storage = false
+  config.delete_cache_id_after_storage = false
 end
