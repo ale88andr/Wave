@@ -7,7 +7,7 @@
   %section.top-bar-section
     %ul.right
       - if user_signed_in?
-        %li= "Здраствуйте, #{current_user.name}"
+        %li= link_to "Здраствуйте, #{current_user.name}", profile_path(current_user)
         %li.divider
         %li= link_to "Выйти", destroy_user_session_path
       -else

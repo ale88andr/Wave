@@ -1,0 +1,70 @@
+%a.button.radius.additional-info Показать/Скрыть дополнительные сведения
+.profile.hidden
+  %h3.subheader Дополнительная информация :
+  = form.fields_for :profile do |profile_f|
+    .row.collapse
+      .small-4.large-4.columns
+        = profile_f.check_box :show_email
+        = profile_f.label :show_email
+      .small-8.large-8.columns
+        = profile_f.select(:country, options_for_select([['Выберите страну',''],['Украина','UA'],['Россия','RU'],['Белоруссия','BE'],['Молдова','ML'],['Польша','PL'],['Казахстан','KZ']]))
+    .row.collapse
+      .small-3.large-3.columns
+        = profile_f.label :birthday, "Дата вашего рождения :"
+        = profile_f.date_select(:birthday, start_year: Time.now.year - 50, end_year: Time.now.year - 5, class: "small", :include_blank => true, :default => nil)
+    .row.collapse
+      .small-4.large-3.columns
+        %span.prefix= profile_f.label :about
+      .small-8.large-9.columns
+        = profile_f.text_area :about
+    .row.collapse
+      .small-4.large-3.columns
+        %span.prefix= profile_f.label :signature
+      .small-8.large-9.columns
+        = profile_f.text_area :signature
+    .row.collapse
+      .small-12.large-12.columns
+        = profile_f.label :gender, "Ваш пол :"
+        = profile_f.radio_button :gender, '0'
+        Мужской
+        %br
+        = profile_f.radio_button :gender, '1'
+        Женский
+    .row.collapse
+      .small-4.large-3.columns
+        %span.prefix= profile_f.label :contacts_phone
+      .small-8.large-9.columns
+        = profile_f.password_field :contacts_phone
+    .row.collapse
+      .small-4.large-3.columns
+        %span.prefix= profile_f.label :contacts_skype
+      .small-8.large-9.columns
+        = profile_f.password_field :contacts_skype
+    .row.collapse
+      .small-4.large-3.columns
+        %span.prefix= profile_f.label :contacts_other
+      .small-8.large-9.columns
+        = profile_f.password_field :contacts_other
+    .row.collapse
+      .small-4.large-3.columns
+        %span.prefix= profile_f.label :contacts_url
+      .small-8.large-9.columns
+        = profile_f.password_field :contacts_url
+    .row.collapse
+      .small-4.large-3.columns
+        %span.prefix= profile_f.label :time_zone
+      .small-8.large-9.columns
+        = profile_f.password_field :time_zone
+    .row.collapse
+      .large-2.small-2.columns
+        Получать рассылку?
+        .switch.small
+          = profile_f.radio_button(:dispatch, true, id: 'true')
+          = profile_f.label(:dispatch_yes, "Да")
+          = profile_f.radio_button(:dispatch, false)
+          = profile_f.label(:dispatch_no, "Нет")
+    .row.collapse
+      .small-4.large-3.columns
+        %span.prefix= profile_f.label :avatar
+      .small-8.large-9.columns
+        = profile_f.password_field :avatar

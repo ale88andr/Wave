@@ -11,7 +11,26 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130826051751) do
+ActiveRecord::Schema.define(:version => 20130826233056) do
+
+  create_table "profiles", :force => true do |t|
+    t.boolean "show_email",     :default => false, :null => false
+    t.date    "birthday"
+    t.string  "country"
+    t.integer "gender"
+    t.text    "about"
+    t.text    "signature"
+    t.string  "contacts_phone"
+    t.string  "contacts_skype"
+    t.string  "contacts_other"
+    t.string  "contacts_url"
+    t.string  "time_zone"
+    t.boolean "dispatch",       :default => false, :null => false
+    t.string  "avatar"
+    t.integer "user_id"
+  end
+
+  add_index "profiles", ["user_id"], :name => "index_profiles_on_user_id"
 
   create_table "users", :force => true do |t|
     t.string   "name",                   :default => "", :null => false

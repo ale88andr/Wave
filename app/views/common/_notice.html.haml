@@ -1,2 +1,2 @@
-%p.notice= notice
-%p.alert= alert
+- flash.each do |key,value|
+    = content_tag(:div, "Сообщение: #{value}", class: "#{key} small-10 large-6 large-centered columns alert-box")

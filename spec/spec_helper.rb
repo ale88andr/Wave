@@ -17,6 +17,7 @@ Spork.prefork do
 
     # Devise
     config.include Devise::TestHelpers, :type => :controller
+	config.include Devise::TestHelpers, :type => :view
 
     config.fixture_path = "#{::Rails.root}/spec/fixtures"
     config.use_transactional_fixtures = true

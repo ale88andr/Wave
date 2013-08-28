@@ -1,0 +1,32 @@
+.row.collapse.profile-user
+  %h3.subheader Просмотр профиля пользователя <b>"#{@user.name}"</b>
+  .small-2.large-3.columns.user-avatar
+    = image_tag "/img/users/default_user_avatar.jpg", size: "200x200"
+  .small-10.large-9.columns.user-info
+    %h2.subheader= @user.name
+    %span.label Дата рождения :
+    = @user.profile.birthday
+    %br
+    %br
+    %span.label Страна :
+    = @user.profile.country
+    %br
+    %br
+    %span.label Пол :
+    = @user.profile.gender
+    %br
+    %br
+    %span.label Skype :
+    = @user.profile.contacts_skype
+    %br
+    %br
+    %span.label Личная информация :
+    = @user.profile.about
+    %br
+    %br
+    %span.label Подпись :
+    = @user.profile.signature
+    %br
+    %br
+    %span.label Сайт :
+    = @user.profile.contacts_url
