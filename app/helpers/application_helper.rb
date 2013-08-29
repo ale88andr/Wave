@@ -15,6 +15,6 @@ module ApplicationHelper
 	end
 
   def set_title page_title = nil
-    page_title == '' ? APPLICATION_NAME : "#{APPLICATION_NAME} :.: #{page_title}"
+    page_title.empty? ? APPLICATION_NAME : "#{APPLICATION_NAME} :.: #{page_title}"
   end
 end
