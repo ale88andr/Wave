@@ -1,4 +1,6 @@
-﻿# Scenario: Enter to register form
+﻿World(Devise::TestHelpers)
+
+# Scenario: Enter to register form
 Given /^I am a guest user$/ do
   visit root_path
 end
@@ -164,3 +166,32 @@ And /^I should be redirected to sign in form with error$/ do
   expect(current_path).to eq new_user_session_path
 end
 # --end Scenario: User does not have account
+
+# Scenario: Visit single user profile by guest user
+When /^I visit any user profile$/ do
+  @user_account = FactoryGirl.create(:valid_user, profile: FactoryGirl.build(:profile))
+  visit profile_path @user_account
+end
+
+Then /^I should see this user info$/ do
+  expect(current_path).to eq profile_path @user_account
+  expect(page).to have_content "Просмотр профиля пользователя \"#{@user_account.name}\""
+end
+
+But /^I should not see its account controls$/ do
+  expect(page).not_to have_link "Редактировать свой профиль", href: '/edit'
+  expect(page).not_to have_button "Удалить мой аккаунт"
+end
+# --end Scenario: Visit single user profile by registered user
+
+# Scenario: Visit single user profile by registered user
+Given /^I am a sign in user$/ do
+  step "I am a register user"
+  sign_in @user
+end
+
+But /^If this is my profile I should see account controls$/ do
+  expect(page).to have_button "Удалить мой аккаунт"
+  expect(page).to have_link "Редактировать свой профиль", href: '/edit'
+end
+# --end Scenario: Visit single user profile by registered user

@@ -2,10 +2,10 @@
 
 FactoryGirl.define do
   factory :valid_user, :class => User do
-    name                    'user'
+    sequence(:name)         {|i| "user #{i}"}
     password                'Pa$$w0rd'
     password_confirmation   'Pa$$w0rd'
-    email                   'user@mail.com'
+    sequence(:email)        {|i| "user#{i}@mail.com"}
   end
 
   factory :invalid_user, parent: :valid_user do

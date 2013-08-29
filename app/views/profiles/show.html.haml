@@ -44,7 +44,7 @@
     = rescue_empty_field @user.contacts_url
     %br
     %br
-  - if @user.id === current_user.id
+  - if user_signed_in? && @user.id == current_user.id
     .small-4.large-3.columns.user-control
       = link_to "Редактировать свой профиль", edit_user_registration_path, class: "button radius large-12 success"
       %br

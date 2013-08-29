@@ -29,6 +29,22 @@ describe User do
   it{ should respond_to :password_confirmation }
   it{ should respond_to :password_digest }
 
+  describe "delegate profile methods" do
+    it{ should respond_to :show_email }
+    it{ should respond_to :birthday }
+    it{ should respond_to :country }
+    it{ should respond_to :gender }
+    it{ should respond_to :about }
+    it{ should respond_to :signature }
+    it{ should respond_to :contacts_url }
+    it{ should respond_to :contacts_other }
+    it{ should respond_to :contacts_skype }
+    it{ should respond_to :contacts_phone }
+    it{ should respond_to :time_zone }
+    it{ should respond_to :dispatch}
+    it{ should respond_to :avatar }
+  end
+
   describe "validation" do
     context "with invalid data" do
       it "when name is empty" do

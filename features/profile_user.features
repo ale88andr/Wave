@@ -1,0 +1,17 @@
+Feature: Show user profile
+
+  In order to show information about any user
+  A any user
+  Should enter to single user profile
+
+  Scenario: Visit single user profile by guest user
+    Given I am a guest user
+    When I visit any user profile
+    Then I should see this user info
+    But I should not see its account controls
+
+  Scenario: Visit single user profile by registered user
+    Given I am a sign in user
+    When I visit any user profile
+    Then I should see this user info
+    But If this is my profile I should see account controls
