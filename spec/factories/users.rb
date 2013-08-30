@@ -11,4 +11,8 @@ FactoryGirl.define do
   factory :invalid_user, parent: :valid_user do
     name nil
   end
+
+  factory :admin_user, parent: :valid_user do
+    roles { [FactoryGirl.create(:admin_role)] }
+  end
 end

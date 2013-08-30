@@ -1,0 +1,75 @@
+- provide(:title, "Профиль #{@user.name}")
+%h2= "Данные пользователя #{@user.name} :"
+.section-container.auto{ data: { :section => '' } }
+  %section
+    %p.title{ data: { section_title: '' }}= link_to 'Основные данные', "#panel1"
+    .content{ data: { section_content: '' }}
+      %h3.subheader= @user.name
+      %b= @user.email
+      %br
+      %br
+      %span.radius.secondary.label Дата регистрации :
+      = format_profile_date @user.updated_at
+      %br
+      %br
+      %span.radius.secondary.label В последний раз был на сайте :
+      = format_profile_date @user.updated_at
+      %br
+      %br
+      %span.radius.label Аватар :
+      %br
+      %br
+      = image_tag @user.avatar.url.nil? ? "/img/users/default_user_avatar.jpg" : @user.avatar.url, size: "200x200"
+  %section
+    %p.title{ data: { section_title: '' }}= link_to 'Профиль', "#panel2"
+    .content{ data: { section_content: '' }}
+      %h3.subheader= "#{@user.name} :.: профиль"
+      %br
+      %br
+      %span.radius.secondary.label Дата рождения :
+      = rescue_empty_field @user.birthday
+      %br
+      %br
+      %span.radius.secondary.label Страна проживания :
+      = rescue_empty_field @user.country
+      %br
+      %br
+      %span.radius.secondary.label Пол :
+      = gender @user.gender
+      %br
+      %br
+      %span.radius.secondary.label Подпись :
+      = rescue_empty_field @user.signature
+      %br
+      %br
+      %span.radius.secondary.label Личная информация :
+      = rescue_empty_field @user.about
+  %section
+    %p.title{ data: { section_title: '' }}= link_to 'Контакты', "#panel3"
+    .content{ data: { section_content: '' }}
+      %h3.subheader= "#{@user.name} :.: Контактные данные"
+      %br
+      %br
+      %span.radius.secondary.label URL адресс :
+      = rescue_empty_field @user.contacts_url
+      %br
+      %br
+      %span.radius.secondary.label Телефон :
+      = rescue_empty_field @user.contacts_phone
+      %br
+      %br
+      %span.radius.secondary.label Дополнительные контакты :
+      = rescue_empty_field @user.contacts_other
+      %br
+      %br
+      %span.radius.secondary.label Skype :
+      = rescue_empty_field @user.contacts_skype
+  %section
+    %p.title{ data: { section_title: '' }}= link_to 'Привилегии', "#panel4"
+    .content{ data: { section_content: '' }}
+      %h3.subheader= "#{@user.name} :.: привилегии"
+      %span.radius.secondary.label Тип пользователя :
+      = get_permission_name @user.role_ids[0]
+.small-12.large-12.columns.user-control
+  = link_to "Редактировать профиль", edit_user_registration_path, class: "button radius"
+  = button_to "Удалить аккаунт", registration_path(resource_name), :data => { :confirm => "Вы уверенны?" }, :method => :delete, class: "button radius alert"

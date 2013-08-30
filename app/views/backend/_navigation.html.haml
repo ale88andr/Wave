@@ -1,0 +1,7 @@
+.section-container.vertical-nav{ data: { :section => "vertical-nav", :options => "one_up: false;"}}
+  %section
+    %p.title{ data: {:section_title => ''}}= link_to "Пользователи", backend_users_path
+    .content{ data: {:section_content => '' }}
+      %ul.side-nav
+        %li= link_to "Список пользователей", backend_users_path
+        %li= link_to "Новый пользователь", new_user_registration_path

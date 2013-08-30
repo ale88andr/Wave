@@ -1,0 +1,9 @@
+%tr
+  %td 
+    %b= user.name
+  %td= user.id
+  %td= user.email
+  %td= get_permission_name user.role_ids[0]
+  %td= format_profile_date user.updated_at
+  %td= link_to "Просмотр", backend_user_path(user)
+  %td= link_to "Удалить", '' #backend_user_path(user), :method => :delete, :data => { :confirm => "Вы уверенны, что хотите удалить пользователя '#{user.username}'" }

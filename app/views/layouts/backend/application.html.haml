@@ -1,0 +1,30 @@
+!!!
+%html
+  /[if lt IE 7]   %html.no-js lt-ie9 lt-ie8 lt-ie7
+  /[if IE 7]      %html.no-js lt-ie9 lt-ie8
+  /[if IE 8]      %html.no-js lt-ie9
+  /[if gt IE 8]   %html.no-js
+  %head
+    %meta{ charset: Rails.application.config.encoding }
+    %meta{ name: "viewport", content: "width=device-width, initial-scale=1.0" }
+
+    %title= set_title(yield :title)
+
+    = stylesheet_link_tag    "application"
+    = javascript_include_tag "vendor/custom.modernizr"
+    = csrf_meta_tags
+
+  %body{id: params[:controller] << '_controller'}
+    %section#wrap
+      = render 'common/header'
+      = render 'common/notice'
+      .row.collapse
+        .small-3.large-2.columns
+          = render 'backend/navigation'
+        .small-9.large-10.columns
+          = yield
+
+      = javascript_include_tag "application"
+
+    = render "common/footer"
+    = debug(params) if Rails.env.development?

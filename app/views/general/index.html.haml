@@ -6,3 +6,5 @@
   .small-8.large-9.columns
     %h1 General#index
     %p Find me in app/views/general/index.html.haml
+- if can? :manage, :all
+  You are admin!

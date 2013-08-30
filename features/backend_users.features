@@ -1,0 +1,19 @@
+Feature: Manage users
+
+  In Order to manage any user
+  A user with administrator privileges
+  Should use backend user controls
+
+  Scenario: Visiting backend users list
+    Given I am a register user with administrator privileges
+    And Any users exists
+    When I visiting backend users path
+    Then I should see a list of existing users
+    And I should see manage user controls
+
+  Scenario: Visiting single user page
+    Given I am a register user with administrator privileges
+    And User "Jon_Doe" exists
+    When I visiting backend users path and click on "Jon_Doe" profile link
+    Then I should see a "Jon_Doe" profile
+    And I should see user manage controls 

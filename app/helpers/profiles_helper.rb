@@ -14,4 +14,13 @@
 	def rescue_empty_field field
 		field == '' || field.nil? ? "Не указанно" : field
 	end
+
+	def get_permission_name(permission_id)
+		permission = case permission_id
+			when 1 then "Администратор"
+			when 2 then "Менеджер"
+			when 3 then "Пользователь"
+			else "Гость" 		
+		end
+	end
 end

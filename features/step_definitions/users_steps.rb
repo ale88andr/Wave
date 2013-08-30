@@ -22,7 +22,7 @@ When /^I click to the register link$/ do
 end
 
 Then /^I should see empty form$/ do
-  expect(page).to have_content "Регистрация нового пользователя"
+  expect(page).to have_content "Регистрация пользователя"
   within '#new_user' do
     expect(page.find_field('user[name]')).not_to be_nil
     expect(page.find_field('user[email]')).not_to be_nil
@@ -46,6 +46,7 @@ Given /^I am a guest user visiting registration form$/ do
 end
 
 When /^I filing registration form with valid data$/ do
+  FactoryGirl.create(:user_role)
   @user = FactoryGirl.attributes_for(:valid_user)
   within '#new_user' do
     fill_in('user[name]', with: @user[:name])
@@ -202,3 +203,60 @@ But /^If this is my profile I should see account controls$/ do
   expect(page).to have_link "Редактировать свой профиль", href: '/edit'
 end
 # --end Scenario: Visit single user profile by registered user
+
+# Scenario: Visiting backend users list
+Given /^I am a register user with administrator privileges$/ do
+  FactoryGirl.create(:user_role)
+  @admin_user = FactoryGirl.create(:admin_user)
+  sign_in @admin_user
+end
+
+And /^Any users exists$/ do
+  @test_user_1, @test_user_2 = FactoryGirl.create(:valid_user), FactoryGirl.create(:valid_user)
+end
+
+When /^I visiting backend users path$/ do
+  visit backend_users_path
+  page.current_url == /backend\/users/
+end
+
+Then /^I should see a list of existing users$/ do
+  expect(page).to have_content "Список зарегистрированных в системе пользователей:"
+  expect(page).to have_link "Создать нового пользователя", href: new_user_registration_path
+  expect(page).to have_content @test_user_1.name
+  expect(page).to have_content @test_user_2.name
+end
+
+And /^I should see manage user controls$/ do
+  expect(page).to have_link "Просмотр", href: backend_user_path(@test_user_1)
+  expect(page).to have_link "Просмотр", href: backend_user_path(@test_user_2)
+  expect(page).to have_link "Удалить"
+end
+# --end Scenario: Visiting backend users list
+
+# Scenario: Visiting single user page
+And /^User (.+) exists$/ do |username|
+  FactoryGirl.create(:valid_user, name: username, profile: FactoryGirl.build(:profile))
+  expect{User.find_by_name(username)}.not_to be_nil
+end
+
+When /^I visiting backend users path and click on (.+) profile link$/ do |username|
+  current_user = User.find_by_name(username)
+  visit backend_users_path
+  click_link("Просмотр", href: backend_user_path(current_user))
+  expect(current_path).to eq backend_user_path(current_user)
+end
+
+Then /^I should see a (.+) profile$/ do |username|
+  expect(page).to have_content username
+  expect(page).to have_content "Основные данные"
+  expect(page).to have_content "Профиль"
+  expect(page).to have_content "Привилегии"
+  expect(page).to have_content "Контакты"
+end
+
+And /^I should see user manage controls$/ do
+  expect(page).to have_button "Удалить аккаунт"
+  expect(page).to have_link "Редактировать профиль"
+end
+# --end Scenario: Visiting single user page

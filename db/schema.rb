@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130826233056) do
+ActiveRecord::Schema.define(:version => 20130830074442) do
 
   create_table "profiles", :force => true do |t|
     t.boolean "show_email",     :default => false, :null => false
@@ -31,6 +31,18 @@ ActiveRecord::Schema.define(:version => 20130826233056) do
   end
 
   add_index "profiles", ["user_id"], :name => "index_profiles_on_user_id"
+
+  create_table "roles", :force => true do |t|
+    t.string "name"
+  end
+
+  create_table "roles_users", :id => false, :force => true do |t|
+    t.integer "user_id"
+    t.integer "role_id"
+  end
+
+  add_index "roles_users", ["role_id"], :name => "index_roles_users_on_role_id"
+  add_index "roles_users", ["user_id"], :name => "index_roles_users_on_user_id"
 
   create_table "users", :force => true do |t|
     t.string   "name",                   :default => "", :null => false
