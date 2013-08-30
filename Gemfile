@@ -30,7 +30,7 @@ gem 'json'
 
 # media
 gem 'carrierwave'
-gem 'mini_magick', '3.5.0'
+gem 'mini_magick', :git => 'git://github.com/minimagick/minimagick.git', :ref => '6d0f8f953112cce6324a524d76c7e126ee14f392'
 
 # auth
 gem 'devise'
@@ -38,3 +38,6 @@ gem 'cancan'
 
 # paginate
 gem 'kaminari'
+
+# web-server
+gem 'thin'

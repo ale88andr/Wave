@@ -2,7 +2,7 @@
 .row.collapse.profile-user
   %h3.subheader Просмотр профиля пользователя <b>"#{@user.name}"</b>
   .small-2.large-3.columns.user-avatar
-    = image_tag "/img/users/default_user_avatar.jpg", size: "200x200"
+    = image_tag @user.avatar.url.nil? ? "/img/users/default_user_avatar.jpg" : @user.avatar.url, size: "200x200"
   .small-6.large-5.columns.user-info
     %h2.subheader= @user.name
     %span.label E-mail :

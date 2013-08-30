@@ -1,4 +1,11 @@
-﻿World(Devise::TestHelpers)
+﻿def sign_in user
+  visit new_user_session_path
+  within '#new_user' do
+    fill_in('user[name]', with: user.name)
+    fill_in('user[password]', with: user.password)
+  end
+  click_button("Войти")
+end
 
 # Scenario: Enter to register form
 Given /^I am a guest user$/ do
@@ -187,7 +194,7 @@ end
 # Scenario: Visit single user profile by registered user
 Given /^I am a sign in user$/ do
   step "I am a register user"
-  sign_in @user
+  sign_in @user_with_account
 end
 
 But /^If this is my profile I should see account controls$/ do
