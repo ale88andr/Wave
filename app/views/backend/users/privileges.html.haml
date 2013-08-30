@@ -1,0 +1,8 @@
+- provide(:title, "Редактирование привилегий пользователя #{@user.name}")
+.small-6.large-8.columns
+  %h2.subheader= "Редактирование привилегий пользователя #{@user.name}"
+  = render 'form_privileges'
+.sub-nav
+  %dt Навигация :
+  %dd.active= link_to "Назад", :back
+  %dd= link_to "К списку пользователей", backend_users_path

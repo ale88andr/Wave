@@ -72,4 +72,5 @@
       = get_permission_name @user.role_ids[0]
 .small-12.large-12.columns.user-control
   = link_to "Редактировать профиль", edit_user_registration_path, class: "button radius"
+  = link_to "Изменить привилегии", backend_user_privileges_path(@user), class: "button radius"
   = button_to "Удалить аккаунт", registration_path(resource_name), :data => { :confirm => "Вы уверенны?" }, :method => :delete, class: "button radius alert"

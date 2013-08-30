@@ -2,7 +2,9 @@ Wave::Application.routes.draw do
 
 	# Backend
 	namespace :backend do
-		resources :users
+		resources :users do
+      get 'privileges', action: :privileges
+    end
 	end
 
   # Devise

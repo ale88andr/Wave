@@ -1,0 +1,9 @@
+= form_for [:backend, @user], html:{class: "custom"} do |f|
+  .row
+    .large-12.columns
+      .row.collapse
+        = f.label "Задайте привилегию пользователю( текущая - #{get_permission_name(@user.role_ids[0])} )"
+        .small-8.columns
+          = f.collection_select :role_ids, @roles, :id, :name, class: "small secondary radius button dropdown", selected: @user.role_ids[0]
+        .small-4.columns
+          = f.submit "Изменить привилегии", class: "button prefix"

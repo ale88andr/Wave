@@ -6,4 +6,9 @@ class Backend::UsersController < Backend::ApplicationController
 	def show
 		@user = User.find(params[:id])
 	end
+
+  def privileges
+    @user = User.find(params[:user_id])
+    @roles = Role.all
+  end
 end
