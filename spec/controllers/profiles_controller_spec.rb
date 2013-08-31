@@ -1,7 +1,6 @@
 require 'spec_helper'
 
 describe ProfilesController do
-
   context "#show" do
     let(:user) { FactoryGirl.create(:valid_user) }
     let(:profile) { stub_model(Profile).as_null_object }

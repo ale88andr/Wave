@@ -27,6 +27,7 @@
 
   def destroy
     @user.destroy
+    redirect_to backend_users_path, notice: "Пользователь удален!"
   end
 
   protected
