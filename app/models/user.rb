@@ -28,7 +28,7 @@ class User < ActiveRecord::Base
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :trackable#, :validatable
 
-  attr_accessible :name, :email, :password, :password_confirmation, :remember_me, :profile_attributes
+  attr_accessible :name, :email, :password, :password_confirmation, :remember_me, :profile_attributes, :role_ids
 
   # CanCan permission.
   has_and_belongs_to_many :roles
@@ -64,7 +64,7 @@ class User < ActiveRecord::Base
 
   private
     def create_default_role
-      self.roles << Role.find_by_name(:user)  
+      self.roles << Role.find_by_name(:user)
     end
 
 end

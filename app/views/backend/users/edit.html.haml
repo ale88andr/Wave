@@ -1,0 +1,10 @@
+- provide(:title, "Редактирование профиля #{current_user.name}")
+.large-7.columns
+  .section-container.auto{ data: { :section => '' } }
+    %section
+      %p.title{ data: { section_title: '' }}= link_to 'Редактирование профиля', "#panel1"
+      .content{ data: { section_content: '' }}
+        %h3.subheader= @user.name
+        = form_for [:backend, @user], html: { class: "custom" } do |f|
+          = render partial: "profiles/form", locals: { form: f }
+          = f.submit "Обновить данные", class: "button radius success"

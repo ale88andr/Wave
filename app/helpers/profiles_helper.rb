@@ -4,7 +4,7 @@
 	end
 
 	def gender param
-		param == 1 ? "Мужской" : "Женский"
+		param == 1 ? "Женский" : "Мужской"
 	end
 
 	def format_profile_date date
@@ -20,7 +20,7 @@
 			when 1 then "Администратор"
 			when 2 then "Менеджер"
 			when 3 then "Пользователь"
-			else "Гость" 		
+			else "Гость"
 		end
 	end
 end

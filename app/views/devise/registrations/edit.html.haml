@@ -1,36 +1,43 @@
 - provide(:title, "Редактирование профиля #{current_user.name}")
-%h2.subheader= "Редактирование профиля #{current_user.name}"
-= form_for(resource, :as => resource_name, :url => registration_path(resource_name), :html => { :method => :put }) do |f|
-  = devise_error_messages!
-  %div
-    = f.label :email
-    %br/
-    = f.email_field :email, :autofocus => true
-  - if devise_mapping.confirmable? && resource.pending_reconfirmation?
+.large-7.large-centered.columns
+  %h2.subheader= "Редактирование профиля #{current_user.name}"
+  = form_for(resource, :as => resource_name, :url => registration_path(resource_name), :html => { :method => :put, :class => "custom" }) do |f|
+    = devise_error_messages!
     %div
-      Currently waiting confirmation for: #{resource.unconfirmed_email}
-  %div
-    = f.label :name, t('.name')
-    %br/
-    = f.text_field :name
-  %div
-    = f.label :password
-    %i (leave blank if you don't want to change it)
-    %br/
-    = f.password_field :password, :autocomplete => "off"
-  %div
-    = f.label :password_confirmation
-    %br/
-    = f.password_field :password_confirmation
-  %div
-    = f.label :current_password
-    %i (we need your current password to confirm your changes)
-    %br/
-    = f.password_field :current_password
-    %br/
-    = render partial: "profiles/form", locals: { form: f }
-  %div= f.submit "Обновить данные", class: "button radius success"
-%h3.subheader Отмена аккаунта
-%p
-  Недовальны? #{button_to "Удалить мой аккаунт", registration_path(resource_name), :data => { :confirm => "Вы уверенны?" }, :method => :delete, class: "button radius alert"}
-= link_to "Назад", :back
+      = f.label :email
+      %br/
+      = f.email_field :email, :autofocus => true
+    - if devise_mapping.confirmable? && resource.pending_reconfirmation?
+      %div
+        Currently waiting confirmation for: #{resource.unconfirmed_email}
+    %div
+      = f.label :name, t('.name')
+      %br/
+      = f.text_field :name
+    %div
+      = f.label :password
+      %i (leave blank if you don't want to change it)
+      %br/
+      = f.password_field :password, :autocomplete => "off"
+    %div
+      = f.label :password_confirmation
+      %br/
+      = f.password_field :password_confirmation
+    %div
+      = f.label :current_password
+      %i (we need your current password to confirm your changes)
+      %br/
+      = f.password_field :current_password
+      %br/
+      %a.button.radius.additional-info Показать/Скрыть дополнительные сведения
+      .profile.hidden
+        = render partial: "profiles/form", locals: { form: f }
+    %div= f.submit "Обновить данные", class: "button radius success"
+  %h3.subheader Отмена аккаунта
+  %p
+    Недовальны? #{button_to "Удалить мой аккаунт", registration_path(resource_name), :data => { :confirm => "Вы уверенны?" }, :method => :delete, class: "button radius alert"}
+  .sub-nav
+    %dt Навигация :
+    %dd.active= link_to "Назад", :back
+    %dd= link_to "На главную", root_path
+%br

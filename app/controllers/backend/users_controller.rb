@@ -1,14 +1,37 @@
-class Backend::UsersController < Backend::ApplicationController
+﻿class Backend::UsersController < Backend::ApplicationController
+
+  before_filter(only: [:show, :privileges, :edit, :update, :destroy]) { |m| m.get_user_by_id(params[:id].nil? ? params[:user_id] : params[:id]) }
+
 	def index
 		@user = User.all
 	end
 
 	def show
-		@user = User.find(params[:id])
 	end
 
   def privileges
-    @user = User.find(params[:user_id])
     @roles = Role.all
   end
+
+  def edit
+  end
+
+  def update
+    if @user.update_attributes(params[:user])
+      redirect_to backend_users_path, notice: "Данные пользователя '#{@user.name}' обновленны."
+    else
+      flash[:error] = "Данные пользователя не обновленны."
+      render "edit"
+    end
+  end
+
+  def destroy
+    @user.destroy
+  end
+
+  protected
+
+    def get_user_by_id user_id
+      @user = User.find(user_id)
+    end
 end
