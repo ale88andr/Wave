@@ -1,16 +1,12 @@
-class Ability
+class BackendAbility
   include CanCan::Ability
-
   def initialize(user)
     user ||= User.new # guest user (not logged in)
 
     if user.role? :admin
       can :manage, :all
     elsif user.role? :user
-      can :read, :all
-      can [:new, :create, :show], User
-    else
-      can :read, :all
+      cannot :read, :all
     end
   end
 end
