@@ -15,13 +15,19 @@ describe Backend::UsersController do
     end
   end
 
-  shared_examples_for "access denaied" do
+  shared_examples_for "access denied" do
     it "redirect to root" do
       expect(response).to redirect_to root_path
     end
 
     it "render alert" do
       expect(flash[:alert]).not_to be_nil
+    end
+  end
+
+  shared_examples_for "404" do
+    it "render error template" do
+      expect(response).to render_template(file: 'public/404')
     end
   end
 
@@ -60,6 +66,12 @@ describe Backend::UsersController do
       it_behaves_like "render template", 'show' do
         before {get :show, id: test_user}
       end
+
+      context "when record not found" do
+        it_behaves_like "404" do
+          before {get :show, id: 1001}
+        end
+      end
     end
 
     describe "#edit" do
@@ -74,6 +86,12 @@ describe Backend::UsersController do
 
       it_behaves_like "render template", 'edit' do
         before {get :edit, id: test_user}
+      end
+
+      context "when record not found" do
+        it_behaves_like "404" do
+          before {get :edit, id: 1001}
+        end
       end
     end
 
@@ -131,6 +149,12 @@ describe Backend::UsersController do
       xit "assigns @roles to view" do
         get :privileges, user_id: test_user
         expect(assigns[:roles]).to eq role
+      end
+
+      context "when record not found" do
+        it_behaves_like "404" do
+          before {get :privileges, user_id: 1001}
+        end
       end
     end
 

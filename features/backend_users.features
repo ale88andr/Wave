@@ -1,4 +1,4 @@
-Feature: Manage users
+﻿Feature: Manage users
 
   In Order to manage any user
   A user with administrator privileges
@@ -16,4 +16,47 @@ Feature: Manage users
     And User "Jon_Doe" exists
     When I visiting backend users path and click on "Jon_Doe" profile link
     Then I should see a "Jon_Doe" profile
-    And I should see user manage controls 
+    And I should see user manage controls
+
+  Scenario: Visiting single user page which does not exists
+    Given I am a register user with administrator privileges
+    And "Root" user does not exists
+    When I visiting backend users path and try access to "Root" profile
+    Then I should see a not found page
+
+  Scenario: Edit user profile
+    Given I am a register user with administrator privileges
+    And User "Jon_Doe" exists
+    When I visiting backend users path and click on "Jon_Doe" profile link
+    And Click on edit profile button
+    Then I should see edit profile form
+
+  Scenario: Update user profile
+    Given I am a register user with administrator privileges
+    And User "Jon_Doe" exists
+    When I fill in updated information contact phone as "099-237-65-89" to profile form
+    And Click on update button
+    Then I should redirect to index page with success message
+    And User contacts phone should be updated by "099-237-65-89"
+
+  Scenario: Delete user profile
+    Given I am a register user with administrator privileges
+    And User "Jon_Doe" exists
+    When I visiting backend users path and click on delete button
+    Then I should redirect to index path with success message
+    And User "Jon_Doe" should be deleted
+
+  Scenario: Edit user privileges
+    Given I am a register user with administrator privileges
+    And User "Jon_Doe" exists
+    When I visiting backend users path and click on "Jon_Doe" profile link
+    And Click on edit privileges button
+    Then I should see edit privileges form
+
+  Scenario: Update user privileges
+    Given I am a register user with administrator privileges
+    And User "Jon_Doe" exists
+    And "Jon_Doe" role is user
+    When I visiting "Jon_Doe" profile and click on edit privileges button
+    And I select "manager" role on edit privileges form and save
+    Then "Jon_Doe" role should be manager

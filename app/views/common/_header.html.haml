@@ -7,9 +7,22 @@
   %section.top-bar-section
     %ul.right
       - if user_signed_in?
-        %li= link_to "Здраствуйте, #{current_user.name}", profile_path(current_user)
-        %li.divider
-        %li= link_to "Выйти", destroy_user_session_path
+        %li.has-dropdown.not-click
+          = link_to "Здраствуйте, #{current_user.name}", profile_path(current_user)
+          %ul.dropdown
+            %li
+              %label Меню администратора
+            %li= link_to "Перейти в админ панель", backend_users_path if current_user.role? :admin
+            %li.divider
+            %li
+              %label Меню профиль
+            %li= link_to "Профиль", profile_path(current_user)
+            %li= link_to "Редактировать профиль", edit_user_registration_path(current_user)
+            %li.divider
+            %li
+              %label Выход из аккаунта
+            %li= link_to "Выйти", destroy_user_session_path
+            %li.divider
       -else
         %li= link_to "Регистрация", new_user_registration_path
         %li.divider

@@ -10,6 +10,6 @@ class ApplicationController < ActionController::Base
   private
 
     def record_not_found
-      render 'public/404'
+      render 'public/404', status: 404
     end
 end

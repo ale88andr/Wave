@@ -236,7 +236,7 @@ end
 
 # Scenario: Visiting single user page
 And /^User (.+) exists$/ do |username|
-  FactoryGirl.create(:valid_user, name: username, profile: FactoryGirl.build(:profile))
+  @new_user = FactoryGirl.create(:valid_user, name: username, profile: FactoryGirl.build(:profile))
   expect{User.find_by_name(username)}.not_to be_nil
 end
 
@@ -260,3 +260,134 @@ And /^I should see user manage controls$/ do
   expect(page).to have_link "Редактировать профиль"
 end
 # --end Scenario: Visiting single user page
+
+# Scenario: Visiting single user page which does not exists
+And /^(.+) user does not exists$/ do |username|
+  expect(User.find_by_name(username)).to be_nil
+end
+
+When /^I visiting backend users path and try access to (.+) profile$/ do |username|
+  visit backend_user_path(username)
+end
+
+Then /^I should see a not found page$/ do
+  expect(page).to have_content "The page you were looking for doesn't exist."
+end
+# --end Scenario: Visiting single user page which does not exists
+
+# Scenario: Edit user profile
+And /^Click on edit profile button$/ do
+  find_link("Редактировать профиль").click
+end
+
+Then /^I should see edit profile form$/ do
+  expect(page).to have_text @new_user.name
+  within "#edit_user_#{@new_user.id}" do
+    expect(page).to have_selector("h3", text: "Дополнительная информация :")
+    expect(page).to have_select("user[profile_attributes][country]")
+    expect(page).to have_select("user[profile_attributes][birthday(3i)]")
+    expect(page).to have_select("user[profile_attributes][birthday(2i)]")
+    expect(page).to have_select("user[profile_attributes][birthday(1i)]")
+    expect(page).to have_select("user[profile_attributes][birthday(1i)]")
+    expect(page).to have_field("user[profile_attributes][gender]", 
+                                        type: "radio",
+                                        with: "0"
+                                        )
+    expect(page).to have_field("user[profile_attributes][gender]", 
+                                        type: "radio",
+                                        with: "1"
+                                        )
+    expect(page).to have_field("user[profile_attributes][contacts_phone]", type: "text")
+    expect(page).to have_field("user[profile_attributes][contacts_skype]", type: "text")
+    expect(page).to have_field("user[profile_attributes][contacts_other]", type: "text")
+    expect(page).to have_field("user[profile_attributes][contacts_url]", type: "text")
+    expect(page).to have_field("user[profile_attributes][dispatch]", 
+                                        type: "radio",
+                                        with: "true"
+                                        )
+    expect(page).to have_field("user[profile_attributes][dispatch]", 
+                                        type: "radio",
+                                        with: "false"
+                                        )
+    expect(page).to have_button("Обновить данные")
+  end
+end
+# --end Scenario: Edit user profile
+
+# Scenario: Update user profile
+When /^I fill in updated information contact phone as (.+) to profile form$/ do |phone|
+  visit backend_user_path @new_user
+  step "Click on edit profile button"
+  step "I should see edit profile form"
+  within "#edit_user_#{@new_user.id}" do
+    fill_in('user[profile_attributes][contacts_phone]', with: phone)
+  end
+end
+
+And /^Click on update button$/ do
+  click_button "Обновить данные"
+end
+
+Then /^I should redirect to index page with success message$/ do
+  expect(current_path).to eq backend_users_path
+  expect(page).to have_content "Данные пользователя '#{@new_user.name}' обновленны."
+end
+
+And /^User contacts phone should be updated by (.+)$/ do |phone|
+  expect(User.find(@new_user).contacts_phone).to eq phone
+end
+# --end Scenario: Update user profile
+
+# Scenario: Delete user profile
+When /^I visiting backend users path and click on delete button$/ do
+  visit backend_users_path
+  click_link("Удалить", href: backend_user_path(@new_user))
+end
+
+Then /^I should redirect to index path with success message$/ do
+  expect(current_path).to eq backend_users_path
+  expect(page).to have_content "Пользователь удален!"
+end
+
+And /^User (.+) should be deleted$/ do |user|
+  expect(User.find_by_name(user)).to be_nil
+end
+# --end Scenario: Delete user profile
+
+# Scenario: Edit user privileges
+And /^Click on edit privileges button$/ do
+  click_link("Изменить привилегии", href: backend_user_privileges_path(@new_user))
+end
+
+Then /^I should see edit privileges form$/ do
+  within "#edit_user_#{@new_user.id}" do
+    expect(page).to have_select("user[role_ids]")
+    expect(page).to have_button("Изменить привилегии")
+  end
+end
+# --end Scenario: Edit user privileges
+
+
+# Scenario: Update user privileges
+And /^(.+) role is user$/ do |role|
+  FactoryGirl.create(:manager_role)
+  expect{User.find(@new_user.id).role? :user}.to be_true
+end
+
+When /^I visiting (.+) profile and click on edit privileges button$/ do |username|
+  visit backend_user_path @new_user
+  click_link("Изменить привилегии", href: backend_user_privileges_path(@new_user))
+end
+
+And /^I select (.+) role on edit privileges form and save$/ do |role|
+  step "I should see edit privileges form"
+  within "#edit_user_#{@new_user.id}" do
+    select('manager', :from => 'user[role_ids]')
+    click_button "Изменить привилегии"
+  end
+end
+
+Then /^(.+) role should be manager$/ do |username|
+  expect(User.find(@new_user.id).role? :manager).to be_true
+end
+# --end Scenario: Update user privileges
