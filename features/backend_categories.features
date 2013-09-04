@@ -1,0 +1,12 @@
+Feature: Manage entity category
+
+  In order an adding, show, edit and delete cattegories of product
+  A user with manager privileges
+  Should use backend categories control
+
+  Scenario: View list of all categories
+    Given I am a register user with administrator privileges
+    And Any categories are exists
+    When I visit backend categories path
+    Then I should see list of categories
+    And I should see categories control

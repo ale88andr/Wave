@@ -11,7 +11,16 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130830074442) do
+ActiveRecord::Schema.define(:version => 20130904122641) do
+
+  create_table "entity_categories", :force => true do |t|
+    t.string  "name"
+    t.text    "description"
+    t.boolean "active",      :default => true
+    t.integer "parent_id",   :default => 0,    :null => false
+  end
+
+  add_index "entity_categories", ["name"], :name => "index_entity_categories_on_name", :unique => true
 
   create_table "profiles", :force => true do |t|
     t.boolean "show_email",     :default => false, :null => false

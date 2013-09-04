@@ -1,0 +1,24 @@
+﻿- provide(:title, "Категории")
+.large-12.small-12.columns
+  %h2.subheader Список доступных категорий:
+  .new_link= link_to "Создать новою категорию", new_backend_category_path
+  -unless @categories.empty?
+    %table.little-table
+      %tr
+        %th Наименование категории:
+        %th ID:
+        %th Описание:
+        %th Видимость:
+        %th Дочерняя категория:
+        %th Редактирование:
+        %th Удаление:
+      - @categories.each do |category|
+        %tr
+          %td
+            %b= category.name
+          %td= category.id
+          %td= category.description
+          %td= category.active
+          %td= category.parent_id
+          %td= link_to "Редактировать", edit_backend_category_path(category)
+          %td= link_to "Удалить", '#' # backend_user_path(user), method: :delete, :data => { confirm: "Вы уверенны, что хотите удалить пользователя '#{user.name}'" }
