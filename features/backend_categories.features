@@ -10,3 +10,9 @@ Feature: Manage entity category
     When I visit backend categories path
     Then I should see list of categories
     And I should see categories control
+
+  Scenario: Create new category of product
+    Given I am a register user with administrator privileges
+    When I visit new category path
+    Then I should see a form which creates new category
+    And I should see a link controls

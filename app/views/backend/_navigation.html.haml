@@ -5,3 +5,10 @@
       %ul.side-nav
         %li= link_to "Список пользователей", backend_users_path
         %li= link_to "Новый пользователь", new_user_registration_path
+        %li.divider
+  %section
+    %p.title{ data: {:section_title => ''}}= link_to "Категории товаров", backend_category_index_path
+    .content{ data: {:section_content => '' }}
+      %ul.side-nav
+        %li= link_to "Список категорий", backend_category_index_path
+        %li= link_to "Создание новой категории", new_backend_category_path

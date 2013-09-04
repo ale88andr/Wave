@@ -1,7 +1,7 @@
 require 'spec_helper'
 
-describe Backend::EntityCategoryController do
-  
+describe Backend::EntityCategoriesController do
+
   let!(:category) { stub_model(EntityCategory).as_null_object }
   let!(:test_category) { FactoryGirl.create(:entity_category) }
 
@@ -25,7 +25,15 @@ describe Backend::EntityCategoryController do
     end
 
     describe "#new" do
+      before { get :new }
 
+      it "reneder new template" do
+        expect(response).to render_template :new
+      end
+
+      it "assigns @category to view" do
+        expect(assigns[:category]).to eq category
+      end
     end
   end
 
