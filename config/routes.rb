@@ -6,6 +6,7 @@ Wave::Application.routes.draw do
       get 'privileges', action: :privileges
     end
     resources :category, controller: "entity_categories"
+    resources :attributes
 	end
 
   # Devise

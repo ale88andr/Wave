@@ -12,5 +12,7 @@
 class EntityCategory < ActiveRecord::Base
   attr_accessible :active, :description, :name, :parent_id
 
+  has_and_belongs_to_many :attributes
+
   validates :name, presence: { message: 'Это поле должно быть заполненно!' }, length: { maximum: 50, too_long: 'Слишком длинное название!' }, uniqueness: { message: 'Такое название уже существует!' }
 end

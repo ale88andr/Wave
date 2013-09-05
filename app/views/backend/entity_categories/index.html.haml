@@ -21,4 +21,4 @@
           %td= visibility category.active
           %td= is_parent category.parent_id
           %td= link_to "Редактировать", edit_backend_category_path(category)
-          %td= link_to "Удалить",  backend_category_path(category), method: :delete, :data => { confirm: "Вы уверенны, что хотите удалить пользователя '#{category.name}'" }
+          %td= link_to "Удалить",  backend_category_path(category), method: :delete, :data => { confirm: "Вы уверенны, что хотите удалить категорию '#{category.name}'" }

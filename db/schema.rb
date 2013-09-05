@@ -11,13 +11,35 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130904122641) do
+ActiveRecord::Schema.define(:version => 20130905114020) do
+
+  create_table "_entity_categories_old_20130905", :force => true do |t|
+    t.string  "name"
+    t.text    "description"
+    t.boolean "active",      :default => true
+    t.integer "parent_id",   :default => 0,    :null => false
+  end
+
+  create_table "attributes", :force => true do |t|
+    t.string  "name"
+    t.integer "unit_id"
+  end
+
+  add_index "attributes", ["unit_id"], :name => "index_attributes_on_unit_id"
+
+  create_table "attributes_entity_categories", :id => false, :force => true do |t|
+    t.integer "attributes_id"
+    t.integer "entity_categories_id"
+  end
+
+  add_index "attributes_entity_categories", ["attributes_id"], :name => "index_attributes_entity_categories_on_attributes_id"
+  add_index "attributes_entity_categories", ["entity_categories_id"], :name => "index_attributes_entity_categories_on_entity_categories_id"
 
   create_table "entity_categories", :force => true do |t|
     t.string  "name"
     t.text    "description"
     t.boolean "active",      :default => true
-    t.integer "parent_id",   :default => 0,    :null => false
+    t.integer "parent_id",   :default => 0
   end
 
   add_index "entity_categories", ["name"], :name => "index_entity_categories_on_name", :unique => true

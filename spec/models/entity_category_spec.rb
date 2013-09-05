@@ -19,6 +19,10 @@ describe EntityCategory do
   it{ should respond_to :active }
   it{ should respond_to :parent_id }
 
+  context "HABTM assosiation" do
+    it { should respond_to :attributes_ids }
+  end
+
   context "validation" do
     context "with valid attributes" do
       it "should be valid" do

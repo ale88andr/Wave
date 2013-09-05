@@ -11,8 +11,16 @@ Feature: Manage entity category
     Then I should see list of categories
     And I should see categories control
 
-  Scenario: Create new category of product
+  Scenario: New category of product
     Given I am a register user with administrator privileges
     When I visit new category path
     Then I should see a form which creates new category
     And I should see a link controls
+
+  Scenario: Create new category of product
+    Given I am a register user with administrator privileges
+    And I visit new category form
+    And I filing new category form with valid data
+    When I click new category button category should created
+    Then I should redirects to index category path
+    And I should see new category in the list of category

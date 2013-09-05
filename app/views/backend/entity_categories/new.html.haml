@@ -2,3 +2,7 @@
 .small-10.large-12
   %h3.subheader Создание новой категории товаров :
   = render 'form'
+  .sub-nav
+    %dt Дополнительно :
+    %dd.active= link_to "Назад", :back
+    %dd= link_to "К списку категорий", backend_category_index_path
