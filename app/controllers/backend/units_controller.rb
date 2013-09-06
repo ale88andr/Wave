@@ -33,13 +33,13 @@
       redirect_to backend_units_path, notice: 'Единица обновленна!'
     else
       flash[:error] = "Невозможно обновить единицу #{@unit.param}"
-      render :new
+      render :edit
     end
   end
 
   protected
 
     def get_unit_by_id id
-      @unit = Unit.find(id)
+      @unit = Unit.find_by_id(id)
     end
 end

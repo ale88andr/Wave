@@ -27,7 +27,7 @@ describe Backend::UnitsController do
 
     describe "#new" do
 
-      let(:unit_stub) { stub_model(Unit).as_new_record }
+      let!(:unit_stub) { stub_model(Unit).as_new_record }
 
       before { get :new }
 
@@ -106,6 +106,80 @@ describe Backend::UnitsController do
         it "redirect to index" do
           delete :destroy, id: 1001
           expect(response.status).to eq 404
+        end
+      end
+    end
+
+    describe "#edit" do
+      context "find unit" do
+        before { Unit.stub(:find).and_return(test_unit) }
+
+        it "send find" do
+          Unit.should_receive(:find).with(test_unit.id.to_s)
+          get :edit, id: test_unit
+        end
+
+        it "render edit template" do
+          get :edit, id: test_unit
+          expect(response).to render_template :edit
+        end
+
+        it "assigns @unit in template" do
+          get :edit, id: test_unit
+          expect(assigns[:unit]).to eq test_unit
+        end
+      end
+
+      context "unit not found" do
+        before :each do
+          Unit.stub(:find).and_raise(ActiveRecord::RecordNotFound)
+        end
+
+        it "render 404 template" do
+          get :edit, id: test_unit
+          expect(response).to render_template file: 'public/404'
+        end
+      end
+    end
+
+    describe "#update" do
+
+      let!(:test_unit_update) { FactoryGirl.attributes_for(:unit, param: 'another param') }
+
+      before { Unit.stub(:find).and_return(test_unit) }
+
+      it "sends find" do
+        Unit.should_receive(:find).with(test_unit.id.to_s)
+        put :update, id: test_unit, unit: test_unit
+      end
+
+      context "return true" do
+
+        before { Unit.stub(:update_attributes).and_return true }
+
+        it "update record" do
+          put :update, id: test_unit, unit: test_unit_update
+          expect(Unit.find_by_param(test_unit_update[:param])).not_to be_nil
+        end
+
+        it "render notice" do
+          put :update, id: test_unit, unit: test_unit_update
+          expect(flash[:notice]).not_to be_nil
+        end
+      end
+
+      context "return false" do
+
+        let!(:params) { FactoryGirl.attributes_for(:unit, param: nil) }
+
+        it "render edit template" do
+          put :update, id: test_unit, unit: params
+          expect(response).to render_template :edit
+        end
+
+        it "render error" do
+          put :update, id: test_unit, unit: params
+          expect(flash[:error]).not_to be_nil
         end
       end
     end
