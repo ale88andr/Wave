@@ -22,6 +22,7 @@
 
   def destroy
     @unit.destroy
+    redirect_to backend_units_path, notice: 'Единица измерения удаленна!'
   end
 
   def edit
