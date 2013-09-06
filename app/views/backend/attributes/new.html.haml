@@ -1,9 +1,10 @@
 - provide(:title, "Создание аттрибута товаров")
 .small-10.large-12
   %h3.subheader Создание нового аттрибута :
-  = render 'form'
+  = render 'form', locals: { button_label: "Создать аттрибут" }
   .sub-nav
     %dt Дополнительно :
     %dd.active= link_to "Назад", :back
     %dd= link_to "К списку аттрибутов", backend_attributes_path
     %dd= link_to "К списку категорий", backend_category_index_path
+    %dd= link_to "Создать единицу измерения", new_backend_unit_path

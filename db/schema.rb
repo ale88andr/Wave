@@ -11,14 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130905114020) do
-
-  create_table "_entity_categories_old_20130905", :force => true do |t|
-    t.string  "name"
-    t.text    "description"
-    t.boolean "active",      :default => true
-    t.integer "parent_id",   :default => 0,    :null => false
-  end
+ActiveRecord::Schema.define(:version => 20130906111459) do
 
   create_table "attributes", :force => true do |t|
     t.string  "name"
@@ -28,12 +21,12 @@ ActiveRecord::Schema.define(:version => 20130905114020) do
   add_index "attributes", ["unit_id"], :name => "index_attributes_on_unit_id"
 
   create_table "attributes_entity_categories", :id => false, :force => true do |t|
-    t.integer "attributes_id"
-    t.integer "entity_categories_id"
+    t.integer "attribute_id"
+    t.integer "entity_category_id"
   end
 
-  add_index "attributes_entity_categories", ["attributes_id"], :name => "index_attributes_entity_categories_on_attributes_id"
-  add_index "attributes_entity_categories", ["entity_categories_id"], :name => "index_attributes_entity_categories_on_entity_categories_id"
+  add_index "attributes_entity_categories", ["attribute_id"], :name => "index_attributes_entity_categories_on_attribute_id"
+  add_index "attributes_entity_categories", ["entity_category_id"], :name => "index_attributes_entity_categories_on_entity_category_id"
 
   create_table "entity_categories", :force => true do |t|
     t.string  "name"
@@ -74,6 +67,13 @@ ActiveRecord::Schema.define(:version => 20130905114020) do
 
   add_index "roles_users", ["role_id"], :name => "index_roles_users_on_role_id"
   add_index "roles_users", ["user_id"], :name => "index_roles_users_on_user_id"
+
+  create_table "units", :force => true do |t|
+    t.string  "param"
+    t.integer "attributes_id"
+  end
+
+  add_index "units", ["attributes_id"], :name => "index_units_on_attributes_id"
 
   create_table "users", :force => true do |t|
     t.string   "name",                   :default => "", :null => false

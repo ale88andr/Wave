@@ -1,1 +1,13 @@
-index
+- provide(:title, "Перечень атрибутов")
+.large-12.small-12.columns
+  %h2.subheader Список доступных аттрибутов:
+  .new_link= link_to "Создать новый аттрибут", new_backend_attribute_path
+  -unless @attributes.empty?
+    %table.little-table
+      %tr
+        %th Наименование аттрибута:
+        %th Единица измерения:
+        %th ID:
+        %th Редактирование:
+        %th Удаление:
+      =render @attributes

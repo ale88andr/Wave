@@ -1,0 +1,9 @@
+- provide(:title, "Редактирование аттрибута")
+.small-10.large-12
+  %h3.subheader= "Редактирование аттрибута '#{@attribute.name}' :"
+  = render 'form', locals: { button_label: "Изменить аттрибут" }
+  .sub-nav
+    %dt Дополнительно :
+    %dd.active= link_to "Назад", :back
+    %dd= link_to "К перечню единиц", backend_attributes_path
+    %dd= link_to "Удалить ('#{@attribute.name}')",  backend_attribute_path(@attribute), method: :delete, :data => { confirm: "Вы уверенны, что хотите удалить аттрибут '#{@attribute.name}'" }

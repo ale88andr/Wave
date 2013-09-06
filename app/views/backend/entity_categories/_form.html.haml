@@ -1,4 +1,4 @@
-﻿= form_for @category, url: {action: 'create'}, html:{ class: "custom" } do |f|
+﻿= form_for @category, url: {action: ['create', 'update']}, html:{ class: "custom" } do |f|
   .row.collapse
     .large-12.columns
       .small-4.large-3
@@ -20,5 +20,15 @@
       = f.label :parent_id, "Выберите родительскую категорию :"
     .large-4.columns
       = f.collection_select :parent_id, @categories, :id, :name, class: "small secondary radius button dropdown", include_blank: 'Нет'
+  .row.collapse
+    %h5 Группа атрибутов :
+    = f.label :attribute_ids,  "Выберите атрибуты относящиеся к данной категории :"
+    %br
+    - get_attributes.each do |attr|
+      - if @category.attribute_ids.include? attr.id
+        = check_box_tag "category[attribute_ids][]", attr.id, type: 'checked'
+      - else
+        = check_box_tag "category[attribute_ids][]", attr.id
+      = "#{attr.name} (#{attr.unit.param})"
   %br
   %div= f.submit "Создать категорию", class: "button radius"

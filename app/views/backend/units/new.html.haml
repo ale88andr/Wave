@@ -1,0 +1,8 @@
+- provide(:title, "Создание единицы измерения")
+.small-10.large-12
+  %h3.subheader Создание единицы измерения :
+  = render 'form', locals: { button_label: 'Создать' }
+  .sub-nav
+    %dt Дополнительно :
+    %dd.active= link_to "Назад", :back
+    %dd= link_to "К перечню единиц", backend_attributes_path

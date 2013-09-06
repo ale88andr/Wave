@@ -1,0 +1,6 @@
+%tr
+  %td
+    %b= unit.param
+  %td= unit.id
+  %td= link_to "Изменить", edit_backend_unit_path(unit)
+  %td= link_to "Удалить",  backend_unit_path(unit), method: :delete, :data => { confirm: "Вы уверенны, что хотите удалить категорию '#{unit.param}'" }

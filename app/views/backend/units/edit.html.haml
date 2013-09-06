@@ -1,0 +1,9 @@
+- provide(:title, "Редактирование единицы измерения")
+.small-10.large-12
+  %h3.subheader Редактирование единицы измерения :
+  = render 'form', locals: { button_label: "Изменить" }
+  .sub-nav
+    %dt Дополнительно :
+    %dd.active= link_to "Назад", :back
+    %dd= link_to "К перечню единиц", backend_attributes_path
+    %dd= link_to "Удалить ('#{@unit.param}')",  backend_unit_path(@unit), method: :delete, :data => { confirm: "Вы уверенны, что хотите удалить категорию '#{@unit.param}'" }

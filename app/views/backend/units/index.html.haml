@@ -1,0 +1,12 @@
+- provide(:title, "Параметры атрибутов")
+.large-12.small-12.columns
+  %h2.subheader Список доступных единиц измерений:
+  .new_link= link_to "Создать новою единицу измерения", new_backend_unit_path
+  -unless @units.empty?
+    %table.little-table
+      %tr
+        %th Единица измерения:
+        %th ID:
+        %th Редактирование:
+        %th Удаление:
+      =render @units

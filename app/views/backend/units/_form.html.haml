@@ -1,0 +1,8 @@
+.large-5.columns
+= form_for [:backend, @unit] do |f|
+  .row.collapse
+    .small-4.large-3.columns
+      %span.prefix= f.label :param, "Значение единицы"
+    .small-8.large-9.columns
+      = f.text_field :param, :autofocus => true, placeholder: 'Введите значение'
+    %div= f.submit locals[:button_label], class: "button radius"

@@ -1,0 +1,10 @@
+- provide(:title, "Редактирование категории #{@category.name}")
+.small-10.large-12
+  %h3.subheader= "Редактирование категории #{@category.name} :"
+  = render 'form'
+  .sub-nav
+    %dt Дополнительно :
+    %dd.active= link_to "Назад", :back
+    %dd= link_to "К списку категорий", backend_category_index_path
+    %dd= link_to "Создать аттрибут", new_backend_attribute_path
+    %dd= link_to "Удалить категорию (#{@category.name})", backend_category_path(@category), method: :delete, :data => { confirm: "Вы уверенны, что хотите удалить категорию '#{@category.name}'" }

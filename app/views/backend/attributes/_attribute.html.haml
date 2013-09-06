@@ -1,0 +1,7 @@
+%tr
+  %td
+    %b= attribute.name
+  %td= attribute.unit.nil? ? 'Не заданно' : attribute.unit.param
+  %td= attribute.id
+  %td= link_to "Изменить", edit_backend_attribute_path(attribute)
+  %td= link_to "Удалить",  backend_attribute_path(attribute), method: :delete, :data => { confirm: "Вы уверенны, что хотите удалить аттрибут '#{attribute.name}'" }
