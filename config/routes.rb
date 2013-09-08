@@ -5,8 +5,7 @@ Wave::Application.routes.draw do
 		resources :users do
       get 'privileges', action: :privileges
     end
-    resources :category, controller: "entity_categories"
-    resources :attributes, :units
+    resources :attributes, :units, :categories, :manufacturers, except: :show
 	end
 
   # Devise

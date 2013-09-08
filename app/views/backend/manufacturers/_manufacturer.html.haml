@@ -1,0 +1,7 @@
+%tr
+  %td= image_tag manufacturer.image_url
+  %td
+    %b= manufacturer.name
+  %td= manufacturer.description
+  %td= link_to "Изменить", edit_backend_manufacturer_path(manufacturer)
+  %td= link_to "Удалить",  backend_manufacturer_path(manufacturer), method: :delete, :data => { confirm: "Вы уверенны, что хотите удалить аттрибут '#{manufacturer.name}'" }

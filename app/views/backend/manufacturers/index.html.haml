@@ -1,0 +1,13 @@
+- provide(:title, "Список производителей")
+.large-12.small-12.columns
+  %h2.subheader Производители :
+  .new_link= link_to "Добавить производителя", new_backend_manufacturer_path
+  -unless @manufacturers.empty?
+    %table.little-table
+      %tr
+        %th Логотип:
+        %th Торговая марка:
+        %th Описание:
+        %th Действие:
+        %th Удаление:
+      =render @manufacturers

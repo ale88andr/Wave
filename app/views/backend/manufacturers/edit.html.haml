@@ -1,0 +1,8 @@
+- provide(:title, "Изменить производителя")
+.small-10.large-12
+  %h3.subheader Обновление данных производителя :
+  = render 'form', locals: { button_label: "Обновить данные производителя" }
+  .sub-nav
+    %dt Дополнительно :
+    %dd.active= link_to "Назад", :back
+    %dd= link_to "К списку категорий", backend_categories_path

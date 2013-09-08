@@ -1,0 +1,30 @@
+= form_for [:backend, @manufacturer], html:{ multipart: true, class: "custom" } do |f|
+  - if @manufacturer.errors.any?
+    = render "common/errors", object: @manufacturer
+  .large-12
+    .row.collapse
+      .small-4.large-3.columns
+        %span.prefix= f.label :name, "Марка производителя :"
+      .small-8.large-9.columns
+        = f.text_field :name, :autofocus => true, placeholder: "Введите наименование производителя"
+  .large-12
+    .row.collapse
+      .small-4.large-3.columns
+        %span.prefix= f.label :description, "Информация о производителе :"
+      .small-8.large-9.columns
+        = f.text_area :description
+  .large-12
+    .row.collapse
+      .small-4.large-3.columns
+        %span.prefix= f.label :url, "Информация о производителе :"
+      .small-8.large-9.columns
+        = f.text_field :url, placeholder: "http://"
+  .large-12
+    .row.collapse
+      = image_tag(@manufacturer.image_url) if @manufacturer.image?
+      .small-4.large-3.columns
+        %span.prefix= f.label :image, "Логотип"
+      .small-8.large-9.columns
+        = f.file_field :image
+  %br
+  %div= f.submit locals[:button_label], class: "button radius"

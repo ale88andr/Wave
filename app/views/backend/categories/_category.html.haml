@@ -1,0 +1,9 @@
+%tr
+  %td
+    %b= category.name
+  %td= category.id
+  %td= category.description
+  %td= category.active
+  %td= category.parent_id
+  %td= link_to "Редактировать", edit_backend_category_path(category)
+  %td= link_to "Удалить", category, method: :delete, :data => { confirm: "Вы уверенны, что хотите удалить категорию '#{category.name}'" }

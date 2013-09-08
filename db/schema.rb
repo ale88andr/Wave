@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130906111459) do
+ActiveRecord::Schema.define(:version => 20130907121810) do
 
   create_table "attributes", :force => true do |t|
     t.string  "name"
@@ -20,22 +20,31 @@ ActiveRecord::Schema.define(:version => 20130906111459) do
 
   add_index "attributes", ["unit_id"], :name => "index_attributes_on_unit_id"
 
-  create_table "attributes_entity_categories", :id => false, :force => true do |t|
+  create_table "attributes_categories", :id => false, :force => true do |t|
     t.integer "attribute_id"
-    t.integer "entity_category_id"
+    t.integer "category_id"
   end
 
-  add_index "attributes_entity_categories", ["attribute_id"], :name => "index_attributes_entity_categories_on_attribute_id"
-  add_index "attributes_entity_categories", ["entity_category_id"], :name => "index_attributes_entity_categories_on_entity_category_id"
+  add_index "attributes_categories", ["attribute_id"], :name => "index_attributes_categories_on_attribute_id"
+  add_index "attributes_categories", ["category_id"], :name => "index_attributes_categories_on_category_id"
 
-  create_table "entity_categories", :force => true do |t|
+  create_table "categories", :force => true do |t|
     t.string  "name"
     t.text    "description"
     t.boolean "active",      :default => true
-    t.integer "parent_id",   :default => 0
+    t.integer "parent_id",   :default => 0,    :null => false
   end
 
-  add_index "entity_categories", ["name"], :name => "index_entity_categories_on_name", :unique => true
+  add_index "categories", ["name"], :name => "index_entity_categories_on_name", :unique => true
+
+  create_table "manufacturers", :force => true do |t|
+    t.string "name"
+    t.text   "description"
+    t.string "url"
+    t.string "image"
+  end
+
+  add_index "manufacturers", ["name"], :name => "index_manufacturers_on_name", :unique => true
 
   create_table "profiles", :force => true do |t|
     t.boolean "show_email",     :default => false, :null => false
@@ -69,11 +78,8 @@ ActiveRecord::Schema.define(:version => 20130906111459) do
   add_index "roles_users", ["user_id"], :name => "index_roles_users_on_user_id"
 
   create_table "units", :force => true do |t|
-    t.string  "param"
-    t.integer "attributes_id"
+    t.string "param"
   end
-
-  add_index "units", ["attributes_id"], :name => "index_units_on_attributes_id"
 
   create_table "users", :force => true do |t|
     t.string   "name",                   :default => "", :null => false

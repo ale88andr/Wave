@@ -7,10 +7,10 @@
         %li= link_to "Новый пользователь", new_user_registration_path
         %li.divider
   %section
-    %p.title{ data: {:section_title => ''}}= link_to "Категории товаров", backend_category_index_path
+    %p.title{ data: {:section_title => ''}}= link_to "Категории товаров", backend_categories_path
     .content{ data: {:section_content => '' }}
       %ul.side-nav
-        %li= link_to "Список категорий", backend_category_index_path
+        %li= link_to "Список категорий", backend_categories_path
         %li= link_to "Создание новой категории", new_backend_category_path
   %section
     %p.title{ data: {:section_title => ''}}= link_to "Аттрибуты товаров", backend_attributes_path
@@ -20,3 +20,9 @@
         %li= link_to "Создание нового аттрибута", new_backend_attribute_path
         %li= link_to "Перечень единиц измерений аттрибутов", backend_units_path
         %li= link_to "Создание единицы измерения аттрибута", new_backend_unit_path
+  %section
+    %p.title{ data: {:section_title => ''}}= link_to "Производители", backend_manufacturers_path
+    .content{ data: {:section_content => '' }}
+      %ul.side-nav
+        %li= link_to "Производители", backend_manufacturers_path
+        %li= link_to "Добавить нового производителя", new_backend_manufacturer_path
