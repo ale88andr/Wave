@@ -6,8 +6,14 @@ describe Attribute do
   it { should respond_to :name }
   it { should respond_to :unit_id }
 
-  context "HABTM assosiation" do
-    it { should respond_to :entity_category_ids }
+  describe "relations" do
+    def relation_with_model(relation_with, relation_type)
+      expect(Attribute.reflect_on_association(relation_with).macro).to eq relation_type
+    end
+
+    it { relation_with_model :categories, :has_and_belongs_to_many }
+
+    it { should respond_to :category_ids }
   end
 
   describe "validation" do

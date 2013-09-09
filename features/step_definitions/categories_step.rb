@@ -31,10 +31,10 @@ end
 
 Then /^I should see a form which creates new category$/ do
   expect(page).to have_selector "h3", text: "Создание новой категории товаров :"
-  within "#new_entity_category" do
-    expect(page).to have_field "entity_category[name]", type: 'text'
-    expect(page).to have_checked_field "entity_category[active]"
-    expect(page).to have_select "entity_category[parent_id]"
+  within "#new_category" do
+    expect(page).to have_field "category[name]", type: 'text'
+    expect(page).to have_checked_field "category[active]"
+    expect(page).to have_select "category[parent_id]"
     expect(page).to have_button "Создать категорию"
   end
 end
@@ -53,11 +53,11 @@ end
 
 And /^I filing new category form with valid data$/ do
   @new_category = FactoryGirl.attributes_for(:entity_category)
-  within "#new_entity_category" do
-    fill_in "entity_category[name]", with: @new_category[:name]
-    fill_in "entity_category[description]", with: @new_category[:description]
+  within "#new_category" do
+    fill_in "category[name]", with: @new_category[:name]
+    fill_in "category[description]", with: @new_category[:description]
     check 'Видимая категория'
-    select('Нет', from: 'entity_category[parent_id]')
+    select('Нет', from: 'category[parent_id]')
   end
 end
 

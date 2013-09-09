@@ -2,6 +2,18 @@ require 'spec_helper'
 
 describe Backend::AttributesController do
 
+  it { expect(Backend::AttributesController.superclass).to eq Backend::ApplicationController }
+
+  shared_examples_for "access denyed" do
+    it "redirect to root" do
+      expect(response).to redirect_to root_path
+    end
+
+    it "render alert" do
+      expect(flash[:alert]).not_to be_nil
+    end
+  end
+
   describe "as admin" do
 
     shared_examples_for "record not found" do
@@ -150,7 +162,7 @@ describe Backend::AttributesController do
       end
     end
 
-    describe 'DELETE destroy' do
+    describe 'DELETE #destroy' do
       let!(:attribute) { FactoryGirl.create(:attribute) }
 
       it "deletes the attribute" do
@@ -166,6 +178,47 @@ describe Backend::AttributesController do
         it_behaves_like "record not found" do
           before { delete :destroy, id: 1001 }
         end
+      end
+    end
+  end
+
+  describe "as user" do
+
+    login_as_user
+
+    it "have user privileges" do
+      expect{current_user.role? :user}.to be_true
+    end
+
+    let!(:attribute) { FactoryGirl.create(:attribute) }
+
+    describe "#index" do
+      it_behaves_like "access denyed" do
+        before { get :index }
+      end
+    end
+
+    describe "#new" do
+      it_behaves_like "access denyed" do
+        before { get :new }
+      end
+    end
+
+    describe "#edit" do
+      it_behaves_like "access denyed" do
+        before { get :edit, id: attribute }
+      end
+    end
+
+    describe "#destroy" do
+      it_behaves_like "access denyed" do
+        before { delete :destroy, id: attribute }
+      end
+    end
+
+    describe "#update" do
+      it_behaves_like "access denyed" do
+        before { put :update, id: attribute, user: attribute }
       end
     end
   end

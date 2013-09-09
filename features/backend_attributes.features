@@ -1,0 +1,26 @@
+Feature: Manage attributes
+
+  In order an adding attributes for category of product
+  A user with manager privileges
+  Should use backend attributes controls
+
+  Background:
+    Given I am a register user with administrator privileges
+
+  Scenario: Visiting a list of attributes
+    Given "Width, Height, Weight" attributes exists
+    When I visit attributes index url
+    Then I should see a list of attributes which includes "Width, Height, Weight"
+    And I should see new attribute control
+
+  Scenario: Adding new attribute
+    When I visit new attribute link
+    Then I should see a new attribute form
+    And I should see extra controls
+
+  Scenario: Create new attribute
+    Given I visiting new attribute form
+    When I fill in new attribute form
+    And I click submit button
+    Then I should be redirect to index attribute page
+    And I should see new attribute in the list

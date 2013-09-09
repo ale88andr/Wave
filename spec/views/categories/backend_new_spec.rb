@@ -1,14 +1,10 @@
 ﻿require 'spec_helper'
 
-describe "backend/entity_categories/new" do
-  before :each do
-    render
-  end
+describe "backend/categories/new" do
+  before { render }
 
   context "render" do
-    it "with greeting" do
-      expect(rendered).to have_content("Создание новой категории товаров ")
-    end
+    it { expect(rendered).to have_content("Создание новой категории товаров ") }
 
     it "with new entity category form" do
       expect(rendered).to have_selector("form#new_entity_category")

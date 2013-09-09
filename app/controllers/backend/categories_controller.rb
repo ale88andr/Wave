@@ -1,5 +1,7 @@
 ﻿class Backend::CategoriesController < Backend::ApplicationController
+
   before_filter :get_all_categories, only: [:index, :new, :edit]
+  before_filter only: [:destroy, :edit, :update] { |m| m.get_category_by_id(params[:id]) }
 
   def index
   end
@@ -20,17 +22,14 @@
   end
 
   def destroy
-    @category = Category.find(params[:id])
     @category.destroy
     redirect_to backend_categories_path
   end
 
   def edit
-    @category = Category.find(params[:id])
   end
 
   def update
-    @category = Category.find(params[:id])
     if @category.update_attributes(params[:category])
       redirect_to backend_categories_path, notice: "Категория '#{@category.name}' обновленна!"
     else
@@ -39,10 +38,14 @@
     end
   end
 
-  private
+  protected
 
     def get_all_categories
       @categories = Category.all
+    end
+
+    def get_category_by_id id
+      @category = Category.find_by_id id      
     end
 
 end
