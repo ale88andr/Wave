@@ -2,9 +2,9 @@
 
 FactoryGirl.define do
   factory :manufacturer do
-    name "MyString"
-    description "MyText"
-    url "MyString"
-    image "MyString"
+    sequence(:name)   { |i| "Manufacturer #{i}" }
+    description       "Text description"
+    url               "www.example.com"
+    image             "path/to/image"
   end
 end

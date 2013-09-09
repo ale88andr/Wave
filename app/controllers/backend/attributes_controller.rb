@@ -7,6 +7,7 @@
 	end
 
 	def index
+		@attributes = Attribute.all
 	end
 
 	def create

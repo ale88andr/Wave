@@ -1,5 +1,5 @@
 %tr
-  %td= image_tag manufacturer.image_url
+  %td= image_tag manufacturer.image_url if manufacturer.image?
   %td
     %b= manufacturer.name
   %td= manufacturer.description
