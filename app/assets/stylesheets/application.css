@@ -7,3 +7,8 @@
  .hidden {
  	display: none;
  }
+
+ .current {
+ 	background-color: #2ba6cb;
+ 	color: white;
+ }

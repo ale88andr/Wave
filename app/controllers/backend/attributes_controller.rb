@@ -7,7 +7,7 @@
 	end
 
 	def index
-		@attributes = Attribute.all
+		@attributes = Attribute.order("name ASC").page(params[:page]).per(10)
 	end
 
 	def create
@@ -31,7 +31,7 @@
 
 	def destroy
 		@attribute.destroy
-		redirect_to backend_attributes_path
+		redirect_to backend_attributes_path, notice: "Аттрибут удалён"
 	end
 
 	protected

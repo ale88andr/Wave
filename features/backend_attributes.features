@@ -8,19 +8,48 @@ Feature: Manage attributes
     Given I am a register user with administrator privileges
 
   Scenario: Visiting a list of attributes
-    Given "Width, Height, Weight" attributes exists
-    When I visit attributes index url
-    Then I should see a list of attributes which includes "Width, Height, Weight"
-    And I should see new attribute control
+    Given there are created the following attributes:
+      | First attribute  |
+      | Second attribute |
+      | Third attribute  |
+    When I go to the attributes index page
+    Then I should see a list existing attributes:
+      | First attribute  |
+      | Second attribute |
+      | Third attribute  |
+    And I should see link to new attribute
 
   Scenario: Adding new attribute
     When I visit new attribute link
     Then I should see a new attribute form
     And I should see extra controls
 
-  Scenario: Create new attribute
+  Scenario: Create new attribute with valid params
     Given I visiting new attribute form
-    When I fill in new attribute form
-    And I click submit button
-    Then I should be redirect to index attribute page
-    And I should see new attribute in the list
+    When I fill in new attribute form with attribute name "Just Simple Attribute"
+    Then After click on submit button new attribute "Just Simple Attribute" should be added in database
+    And I redirects to the attributes index page
+    And I should "Just Simple Attribute" attribute on page
+
+  Scenario: Create new attribute with invalid params
+    Given I visiting new attribute form
+    When I fill in new attribute form without attribute name
+    Then After click on submit button attribute should not be added in database
+    And I should see new attribute form again
+    And I should see error message
+
+  Scenario: Editing attribute params
+    Given "First attribute" attribute created
+    And I visit attribute editing form
+    When I fill in new attribute name "Changed attribute" in editing form
+    Then I click on submit button attribute name should be changed to "Changed attribute"
+    And I redirects to the attributes index page
+    And I should "Changed attribute" attribute on page
+    And I should see success message that attribute "Changed attribute" updated
+
+  Scenario: Deleting attribute
+    Given "Attribute for deleting" attribute created
+    And I go to the attributes index page 
+    When I click "Attribute for deleting" delete link attribute should be deleting from database
+    And I redirects to the attributes index page
+    And I should see notice message that attribute deletes

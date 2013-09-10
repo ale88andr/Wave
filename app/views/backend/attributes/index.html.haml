@@ -3,6 +3,7 @@
   %h2.subheader Список доступных аттрибутов:
   .new_link= link_to "Создать новый аттрибут", new_backend_attribute_path
   -unless @attributes.empty?
+    = paginate @attributes
     %table.little-table
       %tr
         %th Наименование аттрибута:
@@ -11,3 +12,4 @@
         %th Редактирование:
         %th Удаление:
       =render @attributes
+    = paginate @attributes
