@@ -21,6 +21,8 @@
 
 class Profile < ActiveRecord::Base
   attr_accessible :show_email, :birthday, :country, :gender, :about, :signature, :contacts_url, :contacts_other, :contacts_skype, :contacts_phone, :time_zone, :dispatch, :avatar
+  
   mount_uploader :avatar, AvatarUploader
+  
   belongs_to :user
 end

@@ -1,6 +1,6 @@
 ﻿# == Schema Information
 #
-# Table name: entity_categories
+# Table name: categories
 #
 #  id          :integer          not null, primary key
 #  name        :string(255)
@@ -17,7 +17,11 @@ class Category < ActiveRecord::Base
 
   has_and_belongs_to_many :eav_attributes, class_name: "Attribute"
 
+  has_many :entities
+
   validates :name, presence: { message: 'Это поле должно быть заполненно!' }, length: { maximum: 50, too_long: 'Слишком длинное название!' }, uniqueness: { message: 'Такое название уже существует!' }
+
+  scope :order_by_parent, order("parent_id ASC")
 
   protected
 

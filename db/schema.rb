@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130907121810) do
+ActiveRecord::Schema.define(:version => 20130911053010) do
 
   create_table "attributes", :force => true do |t|
     t.string  "name"
@@ -36,6 +36,37 @@ ActiveRecord::Schema.define(:version => 20130907121810) do
   end
 
   add_index "categories", ["name"], :name => "index_entity_categories_on_name", :unique => true
+
+  create_table "entities", :force => true do |t|
+    t.string   "name"
+    t.float    "price"
+    t.float    "price_in_currency"
+    t.boolean  "bind_price",              :default => false, :null => false
+    t.integer  "currency_id"
+    t.text     "description"
+    t.integer  "discount_id"
+    t.date     "price_start_date"
+    t.date     "price_end_date"
+    t.string   "image"
+    t.boolean  "published",               :default => true,  :null => false
+    t.string   "advise"
+    t.float    "additional_shiping_cost"
+    t.integer  "views"
+    t.integer  "rate"
+    t.text     "characteristics"
+    t.integer  "manufacturer_id"
+    t.integer  "category_id"
+    t.integer  "availability"
+    t.integer  "guarantee"
+    t.datetime "created_at",                                 :null => false
+    t.datetime "updated_at",                                 :null => false
+  end
+
+  add_index "entities", ["category_id"], :name => "index_entities_on_category_id"
+  add_index "entities", ["currency_id"], :name => "index_entities_on_currency_id"
+  add_index "entities", ["discount_id"], :name => "index_entities_on_discount_id"
+  add_index "entities", ["manufacturer_id"], :name => "index_entities_on_manufacturer_id"
+  add_index "entities", ["name"], :name => "index_entities_on_name", :unique => true
 
   create_table "manufacturers", :force => true do |t|
     t.string "name"
