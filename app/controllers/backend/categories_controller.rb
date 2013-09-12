@@ -45,7 +45,7 @@
     end
 
     def get_category_by_id id
-      @category = Category.find_by_id id      
+      @category = Category.find_by_id id
     end
 
 end

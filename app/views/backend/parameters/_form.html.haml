@@ -1,0 +1,10 @@
+﻿- attributes.each do |attr|
+  = form.fields_for :parameters do |params_form|
+    .row.collapse
+      = params_form.hidden_field :attribute_id, value: attr.id
+      .small-3.large-3.columns
+        %span.prefix= params_form.label :value, attr.name
+      .small-8.large-8.columns.left
+        = params_form.text_field :value
+      .small-1.large-1.columns.left
+        %span.postfix= attr.unit.param unless attr.unit.nil?

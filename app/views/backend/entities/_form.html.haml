@@ -35,15 +35,11 @@
       = f.label :published, "Доступен ?", checked: true
     .row.collapse
       .large-3.columns
-        %span.prefix= f.label :unit_id, "Выберите категорию товара :"
-      .large-3.columns.left
-        = f.collection_select :category_id, get_categories, :id, :name, class: "small secondary radius button dropdown", disabled: lambda{|category| category.parent_id == 0}
-    .row.collapse
-      .large-3.columns
         %span.prefix= f.label :manufacturer_id, "Выберите производителя :"
       .large-3.columns.left
         = f.collection_select :manufacturer_id, get_manufacturers, :id, :name, class: "small secondary radius button dropdown"
-    
+    = f.hidden_field :category_id, value: @category.id
+
     .row.collapse
       .small-12.large-12.columns
         %h4.subheader :.: Ценовые параметры
@@ -68,5 +64,12 @@
       .small-3.large-3.columns.right
         = f.label :price_start_date, "Окончание действия цены :"
         = f.date_select(:price_start_date, start_year: Time.now.year, end_year: Time.now.year + 5, class: "small secondary radius button dropdown", prompt: true)
+    .row.collapse
+      .small-12.large-12.columns
+        %h4.subheader :.: Технические характеристики товара
+        %hr
+      .large-12
+        = render partial: 'backend/parameters/form', :locals => { :attributes => @category.eav_attributes, :form => f }
+
   %br
   %div= f.submit locals[:button_label], class: "button radius"

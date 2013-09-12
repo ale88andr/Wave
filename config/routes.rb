@@ -5,7 +5,10 @@ Wave::Application.routes.draw do
 		resources :users do
       get 'privileges', action: :privileges
     end
-    resources :attributes, :units, :categories, :manufacturers, :entities, except: :show
+    resources :attributes, :units, :categories, :manufacturers, except: :show
+    resources :entities do
+      get  "select", on: :collection
+    end
 	end
 
   # Devise

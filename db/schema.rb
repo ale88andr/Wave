@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130911053010) do
+ActiveRecord::Schema.define(:version => 20130912053157) do
 
   create_table "attributes", :force => true do |t|
     t.string  "name"
@@ -76,6 +76,15 @@ ActiveRecord::Schema.define(:version => 20130911053010) do
   end
 
   add_index "manufacturers", ["name"], :name => "index_manufacturers_on_name", :unique => true
+
+  create_table "parameters", :force => true do |t|
+    t.integer "attribute_id"
+    t.integer "entity_id"
+    t.string  "value"
+  end
+
+  add_index "parameters", ["attribute_id"], :name => "index_parameters_on_attribute_id"
+  add_index "parameters", ["entity_id"], :name => "index_parameters_on_entity_id"
 
   create_table "profiles", :force => true do |t|
     t.boolean "show_email",     :default => false, :null => false

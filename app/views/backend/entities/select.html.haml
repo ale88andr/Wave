@@ -1,7 +1,7 @@
-- provide(:title, "Создание категории товаров")
+- provide(:title, "Выбор категории товаров")
 .small-10.large-12
-  %h3.subheader= "#{@category.name} :.: Добавление карточки нового товара :"
-  = render 'form', locals: { button_label: 'Добавить товар' }
+  %h3.subheader Выбрать категорию товаров :
+  = render 'select_form'
   .sub-nav
     %dt Дополнительно :
     %dd.active= link_to "Назад", :back

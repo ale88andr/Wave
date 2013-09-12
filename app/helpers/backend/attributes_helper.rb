@@ -14,4 +14,8 @@
   def get_manufacturers
   	Manufacturer.all
   end
+
+  def get_attributes_by_category category_id
+    #Attribute.find_by_
+  end
 end

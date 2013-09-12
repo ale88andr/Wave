@@ -1,0 +1,8 @@
+= form_for @entity, url: new_backend_entity_path, method: "get", html: { class: "custom" } do |f|
+  .large-12
+    .row.collapse
+      .large-3.columns
+        %span.prefix= f.label :category_id, "Выберите категорию товара :"
+      .large-3.columns.left
+        = f.collection_select :category_id, get_categories, :id, :name, class: "small secondary radius button dropdown", disabled: lambda{|category| category.parent_id == 0}
+  %div= f.submit "Выбрать", class: "button radius"
