@@ -17,4 +17,6 @@
   validates :price, allow_nil: true, numericality: { message: " - Это поле должно содержать только цифровые значения", greater_than: 0}
   validates :price_in_currency, allow_nil: true, numericality: { message: " - Это поле должно содержать только цифровые значения", greater_than: 0}
 
+  scope :last_by_date, order("created_at DESC")
+
 end

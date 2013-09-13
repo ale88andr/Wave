@@ -2,9 +2,9 @@
 
 FactoryGirl.define do
   factory :category do
-    name 				"TestEntityCategory"
-    description "The description of TestEntityCategory"
-    active 			false
-    parent_id 	0
+    sequence(:name)   { |n| "TestEntityCategory #{n}" }
+    description       "The description of TestEntityCategory"
+    active            false
+    parent_id         0
   end
 end

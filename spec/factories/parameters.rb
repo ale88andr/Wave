@@ -3,6 +3,6 @@
 FactoryGirl.define do
   factory :parameter do
     attribute nil
-    value "MyString"
+    value 		"MyString"
   end
 end

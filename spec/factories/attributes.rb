@@ -2,7 +2,7 @@
 
 FactoryGirl.define do
   factory :attribute do
-    name 			"MyAttribute"
-    unit_id 	1
+    sequence(:name) { |i| "Attribute #{i}" }
+    unit_id 				1
   end
 end

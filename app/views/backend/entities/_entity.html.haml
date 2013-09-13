@@ -1,0 +1,8 @@
+%tr
+  %td
+    %b= entity.name
+  %td= entity.category.name
+  %td= entity.characteristics
+  %td= "#{entity.availability} шт."
+  %td= link_to "Изменить", edit_backend_entity_path(entity)
+  %td= link_to "Удалить",  backend_entity_path(entity), method: :delete, :data => { confirm: "Вы уверенны, что хотите удалить товар '#{entity.name}'" }

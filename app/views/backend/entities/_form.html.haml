@@ -63,7 +63,7 @@
         = f.date_select(:price_start_date, start_year: Time.now.year, end_year: Time.now.year + 5, class: "small secondary radius button dropdown")
       .small-3.large-3.columns.right
         = f.label :price_start_date, "Окончание действия цены :"
-        = f.date_select(:price_start_date, start_year: Time.now.year, end_year: Time.now.year + 5, class: "small secondary radius button dropdown", prompt: true)
+        = f.date_select(:price_end_date, start_year: Time.now.year, end_year: Time.now.year + 5, class: "small secondary radius button dropdown", prompt: true)
     .row.collapse
       .small-12.large-12.columns
         %h4.subheader :.: Технические характеристики товара

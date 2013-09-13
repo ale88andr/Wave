@@ -1,0 +1,14 @@
+- provide(:title, "Список товаров")
+.large-12.small-12.columns
+  %h2.subheader Товары :
+  .new_link= link_to "Добавить товар", select_backend_entities_path
+  -unless @entities.empty?
+    %table.little-table
+      %tr
+        %th Наимеование:
+        %th Категория:
+        %th Краткие характеристики:
+        %th Количество:
+        %th Изменение:
+        %th Удаление:
+      =render @entities
