@@ -7,7 +7,20 @@
   .small-6.large-6.columns
     %b= @entity.name
     %br
+    %br
     %span Краткие характеристики:
+    %br
+    = @entity.characteristics
+    %br
+    %br
+    %b Гарантия :
+    = "#{@entity.guarantee} Месяцев"
+    %br
+    %br
+    = link_to "Редактировать", edit_backend_entity_path, class: "button radius success"
+    %br
+    = link_to "Удалить", backend_entity_path(@entity), method: :delete, data: { confirm: "Удаляем товар #{@entity.name} ?" }, class: "small round alert button"
+
 %br
 %br
 
@@ -18,11 +31,27 @@
       %h3.subheader= @entity.name
       %br
       %span.radius.secondary.label Информация о товаре :
-      = @entity.name
-      
+      %br
+      %br
+      = @entity.description
+
   %section
-    %p.title{ data: { section_title: '' }}= link_to 'Технические характеристики', "#panel2"
+    %p.title{ data: { section_title: '' }}= link_to 'Характеристики', "#panel2"
     .content{ data: { section_content: '' }}
+      %h5.subheader Технические характеристики :
+      %br
+      %table
+        %thead
+          %tr
+            %th Характеристика :
+            %th Значение :
+        %tbody
+          - @entity.parameters.each do |param|
+            %tr
+              %td= param.attribute.name
+              %td= param.value + " " + param.attribute.unit.try(:param).to_s
+      %br
+      %span.subheader * Характеристики и комплектация товара могут изменяться производителем без уведомления
 
   %section
     %p.title{ data: { section_title: '' }}= link_to 'Обсуждение', "#panel3"

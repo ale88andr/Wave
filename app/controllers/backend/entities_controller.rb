@@ -3,7 +3,7 @@
     unless params.has_key?(:entity) && params[:entity].has_key?(:category_id)
       redirect_to select_backend_entities_path, notice: 'Сначала выберите категорию!'
     else
-      @category = Category.find_by_id(params[:entity][:category_id]) 
+      @category = Category.find_by_id(params[:entity][:category_id])
       @entity = Entity.new
       @entity.parameters.build
     end
