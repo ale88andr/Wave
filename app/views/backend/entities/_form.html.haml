@@ -4,7 +4,7 @@
   .large-12
     .row.collapse
       .small-12.large-12.columns
-        %h4.subheader :.: Основные параметры
+        .radius.success.label Основные параметры
         %hr
     .row.collapse
       .small-4.large-3.columns
@@ -42,7 +42,7 @@
 
     .row.collapse
       .small-12.large-12.columns
-        %h4.subheader :.: Ценовые параметры
+        .radius.success.label Ценовые параметры
         %hr
     .row.collapse
       .small-3.large-3.columns
@@ -66,7 +66,7 @@
         = f.date_select(:price_end_date, start_year: Time.now.year, end_year: Time.now.year + 5, class: "small secondary radius button dropdown", prompt: true)
     .row.collapse
       .small-12.large-12.columns
-        %h4.subheader :.: Технические характеристики товара
+        .radius.success.label Технические характеристики товара
         %hr
       .large-12
         = render partial: 'backend/parameters/form', :locals => { :attributes => @category.eav_attributes, :form => f }

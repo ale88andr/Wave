@@ -1,4 +1,4 @@
-= form_for @entity, url: new_backend_entity_path, method: "get", html: { class: "custom" } do |f|
+= form_for @entity, url: redirect_to_new_with_category_backend_entities_path, method: "put", html: { class: "custom" } do |f|
   .large-12
     .row.collapse
       .large-3.columns

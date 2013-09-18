@@ -1,0 +1,32 @@
+Feature: Manage entities
+
+  In order an adding entities for category of product
+  A user with manager privileges
+  Should use backend entities controls
+
+  Background:
+    Given I am a register user with administrator privileges
+
+  Scenario: Visiting #select
+    Given there are created the following categories:
+      | First category  |
+      | Second category |
+      | Third category  |
+    When I go to the entity new link
+    Then I should see a page with category selector which include:
+      | First category  |
+      | Second category |
+      | Third category  |
+    And I should see button to continue
+
+  Scenario: Adding new entity
+    Given there are created the following categories:
+      | Displays |
+    And There are created the following attributes in "Displays" category
+      | First attribute  |
+      | Second attribute |
+      | Third attribute  |
+    When I go to the entity new link
+    And I choose category "Displays"
+    And I click commit button
+    Then I should be redirected to new entity form with "Displays" catetegory attributes

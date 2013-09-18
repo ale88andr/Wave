@@ -1,0 +1,7 @@
+%tr
+  %td= image_tag technology.label_url, size: '45x45' if technology.label?
+  %td
+    %b= technology.name
+  %td= technology.description
+  %td= link_to "Изменить", edit_backend_technology_path(technology)
+  %td= link_to "Удалить",  backend_technology_path(technology), method: :delete, :data => { confirm: "Вы уверенны, что хотите удалить технологию '#{technology.name}'?" }

@@ -5,9 +5,14 @@ Wave::Application.routes.draw do
 		resources :users do
       get 'privileges', action: :privileges
     end
-    resources :attributes, :units, :categories, :manufacturers, except: :show
+    resources :attributes, :units, :manufacturers, :technologies, except: :show
+    resources :categories do
+      resources :entities, only: :new
+    end
+
     resources :entities do
-      get  "select", on: :collection
+      get "select", on: :collection
+      put "redirect_to_new_with_category", on: :collection
     end
 	end
 

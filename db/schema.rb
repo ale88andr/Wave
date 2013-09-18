@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130912053157) do
+ActiveRecord::Schema.define(:version => 20130918150814) do
 
   create_table "attributes", :force => true do |t|
     t.string  "name"
@@ -68,6 +68,14 @@ ActiveRecord::Schema.define(:version => 20130912053157) do
   add_index "entities", ["manufacturer_id"], :name => "index_entities_on_manufacturer_id"
   add_index "entities", ["name"], :name => "index_entities_on_name", :unique => true
 
+  create_table "entities_technologies", :id => false, :force => true do |t|
+    t.integer "entity_id"
+    t.integer "technology_id"
+  end
+
+  add_index "entities_technologies", ["entity_id"], :name => "index_entities_technologies_on_entity_id"
+  add_index "entities_technologies", ["technology_id"], :name => "index_entities_technologies_on_technology_id"
+
   create_table "manufacturers", :force => true do |t|
     t.string "name"
     t.text   "description"
@@ -116,6 +124,14 @@ ActiveRecord::Schema.define(:version => 20130912053157) do
 
   add_index "roles_users", ["role_id"], :name => "index_roles_users_on_role_id"
   add_index "roles_users", ["user_id"], :name => "index_roles_users_on_user_id"
+
+  create_table "technologies", :force => true do |t|
+    t.string "name"
+    t.text   "description"
+    t.string "label"
+  end
+
+  add_index "technologies", ["name"], :name => "index_technologies_on_name", :unique => true
 
   create_table "units", :force => true do |t|
     t.string "param"

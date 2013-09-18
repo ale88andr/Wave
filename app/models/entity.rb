@@ -4,6 +4,8 @@
   belongs_to :manufacturer
   belongs_to :category
 
+  has_and_belongs_to_many :technologies
+
   has_many	:attributes, through: :parameters
   has_many	:parameters
 

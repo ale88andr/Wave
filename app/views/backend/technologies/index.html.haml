@@ -1,0 +1,13 @@
+- provide(:title, "Список технологий")
+.large-12.small-12.columns
+  %h2.subheader Производители :
+  .new_link= link_to "Добавить технологию", new_backend_technology_path
+  -unless @technologies.empty?
+    %table.little-table
+      %tr
+        %th Логотип:
+        %th Торговая марка:
+        %th Описание:
+        %th Действие:
+        %th Удаление:
+      =render @technologies

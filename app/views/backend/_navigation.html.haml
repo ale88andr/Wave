@@ -33,3 +33,9 @@
       %ul.side-nav
         %li= link_to "Список товаров", backend_entities_path
         %li= link_to "Новый товар", select_backend_entities_path
+  %section
+    %p.title{ data: {:section_title => ''}}= link_to "Технологии", backend_technologies_path
+    .content{ data: {:section_content => '' }}
+      %ul.side-nav
+        %li= link_to "Список технологий", backend_technologies_path
+        %li= link_to "Добавить новую технологию", new_backend_technology_path

@@ -1,0 +1,8 @@
+﻿- provide(:title, "Добавление технологий")
+.small-10.large-12
+  %h3.subheader Добавление новой технологии :
+  = render 'form', locals: { button_label: "Добавить технологию" }
+  .sub-nav
+    %dt Дополнительно :
+    %dd.active= link_to "Назад", :back
+    %dd= link_to "К списку технологий", backend_technologies_path

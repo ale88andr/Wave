@@ -1,9 +1,9 @@
 ﻿class Backend::EntitiesController < Backend::ApplicationController
   def new
-    unless params.has_key?(:entity) && params[:entity].has_key?(:category_id)
+    unless params.has_key?(:category_id)
       redirect_to select_backend_entities_path, notice: 'Сначала выберите категорию!'
     else
-      @category = Category.find_by_id(params[:entity][:category_id])
+      @category = Category.find_by_id(params[:category_id])
       @entity = Entity.new
       @entity.parameters.build
     end
@@ -11,6 +11,11 @@
 
   def select
     @entity = Entity.new
+  end
+
+  def redirect_to_new_with_category
+    
+    redirect_to new_backend_category_entity_path(category_id: params[:entity][:category_id])
   end
 
   def create

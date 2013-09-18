@@ -1,6 +1,7 @@
 - provide(:title, "Создание категории товаров")
 .small-10.large-12
-  %h3.subheader= "#{@category.name} :.: Добавление карточки нового товара :"
+  .label= @category.name
+  %h3.subheader Добавление нового товара :
   = render 'form', locals: { button_label: 'Добавить товар' }
   .sub-nav
     %dt Дополнительно :
