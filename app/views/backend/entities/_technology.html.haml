@@ -1,0 +1,7 @@
+- technologies.each do |tech|
+  - if @entity.technology_ids.include? tech.id
+    = check_box_tag "entity[technology_ids][]", tech.id, type: 'checked'
+  - else
+    = check_box_tag "entity[technology_ids][]", tech.id
+  = image_tag tech.label_url if tech.label?
+  = tech.name

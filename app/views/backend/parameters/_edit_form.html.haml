@@ -1,0 +1,10 @@
+- @entity.parameters.each do |parameter|
+  = form.fields_for :parameters, parameter do |params_form|
+    .row.collapse
+      = params_form.hidden_field :attribute_id, value: parameter.attribute.id
+      .small-3.large-3.columns
+        %span.prefix= params_form.label :value, parameter.attribute.name
+      .small-8.large-8.columns.left
+        = params_form.text_field :value
+      .small-1.large-1.columns.left
+        %span.postfix= parameter.attribute.unit.param unless parameter.attribute.unit.nil?

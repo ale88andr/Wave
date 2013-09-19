@@ -1,0 +1,11 @@
+- provide(:title, "Редактирование '#{@entity.name}'")
+.small-10.large-12
+  .label= @entity.category_name
+  %h3.subheader Добавление нового товара :
+  = render 'form', locals: { button_label: 'Редактировать товар' }
+  .sub-nav
+    %dt Дополнительно :
+    %dd.active= link_to "Назад", :back
+    %dd= link_to "К списку категорий", backend_categories_path
+    %dd= link_to "Создать аттрибут", new_backend_attribute_path
+    %dd= link_to "К списку товаров", backend_entities_path

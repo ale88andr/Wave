@@ -14,7 +14,6 @@
   end
 
   def redirect_to_new_with_category
-    
     redirect_to new_backend_category_entity_path(category_id: params[:entity][:category_id])
   end
 
@@ -33,5 +32,19 @@
 
   def index
     @entities = Entity.last_by_date
+  end
+
+  def edit
+    @entity = Entity.find_by_id(params[:id])
+    @category = @entity.category
+  end
+
+  def update
+    @entity = Entity.find_by_id(params[:id])
+    if @entity.update_attributes(params[:entity])
+      redirect_to backend_entity_path @entity, notice: "Товар '#{@entity.name}' создан"
+    else
+      flash[:error] = "Не удалось обновить товар!" and render :edit
+    end
   end
 end

@@ -4,6 +4,7 @@
   .large-12
     .row.collapse
       .small-12.large-12.columns
+        %br
         .radius.success.label Основные параметры
         %hr
     .row.collapse
@@ -42,20 +43,21 @@
 
     .row.collapse
       .small-12.large-12.columns
+        %br
         .radius.success.label Ценовые параметры
         %hr
     .row.collapse
-      .small-3.large-3.columns
+      .small-2.large-2.columns
         %span.prefix= f.label :price, "Цена :"
-      .small-1.large-1.columns.left
+      .small-2.large-2.columns.left
         = f.text_field :price, type: :number, maxlength: 10, placeholder: '0.00', step: 0.2, min: 0
       .small-1.large-1.columns
         .right= f.check_box :bind_price
       .small-3.large-3.columns
         = f.label :bind_price, "Привязать цену товара к $ еквиваленту ?"
-      .small-3.large-3.columns
+      .small-2.large-2.columns
         %span.prefix= f.label :price_in_currency, "Цена в $ :"
-      .small-1.large-1.columns.left
+      .small-2.large-2.columns.left
         = f.text_field :price_in_currency, type: :number, maxlength: 10, placeholder: '0.00', step: 0.2, min: 0, disabled: true
     .row.collapse
       .small-3.large-3.columns
@@ -66,10 +68,22 @@
         = f.date_select(:price_end_date, start_year: Time.now.year, end_year: Time.now.year + 5, class: "small secondary radius button dropdown", prompt: true)
     .row.collapse
       .small-12.large-12.columns
+        %br
         .radius.success.label Технические характеристики товара
         %hr
       .large-12
-        = render partial: 'backend/parameters/form', :locals => { :attributes => @category.eav_attributes, :form => f }
+        - if action_name == 'new'
+          = render partial: 'backend/parameters/form', :locals => { :attributes => @category.eav_attributes, :form => f }
+        - elsif action_name == 'edit'
+          = render partial: 'backend/parameters/edit_form', :locals => { :form => f }
+    .row.collapse
+      .small-12.large-12.columns
+        %br
+        .radius.success.label Технологии, используемые в продукте
+        %hr
+      .large-12
+        = render partial: 'technology', :locals => { :technologies => getTechnologies, :form => f }
 
+  %br
   %br
   %div= f.submit locals[:button_label], class: "button radius"

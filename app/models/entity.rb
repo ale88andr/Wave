@@ -4,16 +4,42 @@
   belongs_to :manufacturer
   belongs_to :category
 
-  has_and_belongs_to_many :technologies
-
-  has_many	:attributes, through: :parameters
-  has_many	:parameters
+  has_many  :attributes, through: :parameters
+  has_many  :parameters
 
   accepts_nested_attributes_for :parameters
 
-  attr_accessible :additional_shiping_cost, :advise, :availability, :bind_price, :characteristics, :description, :guarantee, :image, :name, :price, :price_end_date, :price_in_currency, :price_start_date, :published, :rate, :views, :category_id, :manufacturer_id, :parameters_attributes
+  has_and_belongs_to_many :technologies
+
+  attr_accessible :additional_shiping_cost, :advise, :availability, :bind_price, :characteristics, :description, :guarantee, :image, :name, :price, :price_end_date, :price_in_currency, :price_start_date, :published, :rate, :views, :category_id, :manufacturer_id, :parameters_attributes, :technology_ids
 
   before_save :set_characteristics_from_parameters_attributes
+
+  # technologies macros
+  delegate  :description, 
+            :label, 
+            :name, 
+            to: :technologies, 
+            allow_nil: true, 
+            prefix: true
+
+  # category macros
+  delegate  :active, 
+            :description, 
+            :name, 
+            :parent_id,
+            to: :category, 
+            allow_nil: true, 
+            prefix: true
+
+  # manufacturer macros
+  delegate  :description, 
+            :image, 
+            :name, 
+            :url,
+            to: :manufacturer, 
+            allow_nil: true, 
+            prefix: true
 
   validates :name, presence:{ message:'Это поле должно быть заполненно!' }, uniqueness:{ message:'Такое имя уже существует!' }
   validates :guarantee, allow_nil: true, numericality: { only_integer: " - Это поле должно содержать только цифровые значения" }

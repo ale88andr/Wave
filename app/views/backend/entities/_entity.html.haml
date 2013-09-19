@@ -1,6 +1,6 @@
 %tr
   %td
-    %b= entity.name
+    %b= link_to entity.name, backend_entity_path(entity)
   %td= entity.category.name
   %td= entity.characteristics
   %td= "#{entity.availability} шт."
