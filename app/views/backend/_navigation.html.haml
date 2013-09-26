@@ -39,3 +39,9 @@
       %ul.side-nav
         %li= link_to "Список технологий", backend_technologies_path
         %li= link_to "Добавить новую технологию", new_backend_technology_path
+  %section
+    %p.title{ data: {:section_title => ''}}= link_to "Параметры цен", backend_currencies_path
+    .content{ data: {:section_content => '' }}
+      %ul.side-nav
+        %li= link_to "Параметры валют", backend_currencies_path
+        %li= link_to "Изменить курс", '#'

@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130918150814) do
+ActiveRecord::Schema.define(:version => 20130920101154) do
 
   create_table "attributes", :force => true do |t|
     t.string  "name"
@@ -36,6 +36,12 @@ ActiveRecord::Schema.define(:version => 20130918150814) do
   end
 
   add_index "categories", ["name"], :name => "index_entity_categories_on_name", :unique => true
+
+  create_table "currencies", :force => true do |t|
+    t.string "name"
+    t.string "abbreviation"
+    t.float  "ratio"
+  end
 
   create_table "entities", :force => true do |t|
     t.string   "name"

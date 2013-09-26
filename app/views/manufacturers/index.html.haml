@@ -1,0 +1,3 @@
+- provide(:title, "Производители категории '#{@presenter.category_name}'")
+- @manufacturers.each do |manufacturer|
+	= "#{manufacturer.name} (#{@manufacturers_inc.size})"

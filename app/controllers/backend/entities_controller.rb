@@ -1,4 +1,5 @@
 ﻿class Backend::EntitiesController < Backend::ApplicationController
+  before_filter(only: [:show, :edit, :destroy, :update]) { |m| m.get_entity_by_id(params[:id]) }
   def new
     unless params.has_key?(:category_id)
       redirect_to select_backend_entities_path, notice: 'Сначала выберите категорию!'
@@ -27,7 +28,6 @@
   end
 
   def show
-    @entity = Entity.find_by_id(params[:id])
   end
 
   def index
@@ -35,16 +35,24 @@
   end
 
   def edit
-    @entity = Entity.find_by_id(params[:id])
     @category = @entity.category
   end
 
   def update
-    @entity = Entity.find_by_id(params[:id])
     if @entity.update_attributes(params[:entity])
       redirect_to backend_entity_path @entity, notice: "Товар '#{@entity.name}' создан"
     else
       flash[:error] = "Не удалось обновить товар!" and render :edit
     end
   end
+
+  def destroy
+    @entity.destroy and redirect_to backend_entities_path, notice: "Товар удалён!"
+  end
+
+  protected
+    def get_entity_by_id id
+      @entity = Entity.find_by_id(id)
+    end
+
 end

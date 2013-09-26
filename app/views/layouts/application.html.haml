@@ -18,8 +18,11 @@
     %section#wrap
       = render 'common/header'
       = render 'common/notice'
-      .row
-        = yield
+      .row.collapse
+        .small-9.large-9.columns
+          = yield
+        .small-3.large-2.columns.large-offset-1
+          = render 'common/right_widget'
 
       = javascript_include_tag "application"
 

@@ -1,0 +1,17 @@
+- provide(:title, "Просмотр доступных валют")
+%h5.subheader Параметры валют :
+%br
+%table
+  %thead
+    %tr
+      %th Валюта :
+      %th Суффикс :
+      %th Индекс отношения :
+      %th Курс
+  %tbody
+    - @currencies.each do |currency|
+      %tr
+        %td= currency.name
+        %td= currency.abbreviation
+        %td= currency.ratio
+        %td= link_to 'Изменить', edit_backend_currency_path(currency) unless currency.id == 1

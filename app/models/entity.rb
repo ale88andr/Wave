@@ -5,7 +5,7 @@
   belongs_to :category
 
   has_many  :attributes, through: :parameters
-  has_many  :parameters
+  has_many  :parameters, dependent: :destroy
 
   accepts_nested_attributes_for :parameters
 

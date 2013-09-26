@@ -1,0 +1,12 @@
+- provide(:title, "Изменения курса валюты '#{@currency.name}'")
+%h4.subheader= "Изменения курса валют '#{@currency.name}' :"
+%br
+= form_for [:backend, @currency], html:{ class: "custom" } do |f|
+  .label.secondary Введите стоимость валюты за 100$
+  .row.collapse
+    .large-2.small-3.columns
+      %span.prefix= @currency.name
+    .large-2.small-2.columns.left
+      = f.text_field :ratio, type: :number, maxlength: 10, placeholder: '0.00', min: 0, step: "0.2"
+    .large-2.small-3.columns.left
+      = f.submit "Установить", class: "button radius postfix success"

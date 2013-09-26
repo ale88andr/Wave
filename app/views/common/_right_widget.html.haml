@@ -1,0 +1,20 @@
+.section-container.accordion{ data: { :section => "accordion" }}
+  %section.section.active
+    %p.title
+      = link_to "Меню", "#"
+    .content
+      %ul.side-nav
+        %label Категории товаров :
+        - getParentCategories.each do |parent|
+          %li= link_to parent.name, category_path(parent)
+          %li.divider
+  %section
+    %p.title
+      = link_to "Обзоры", "#"
+    .content
+      %p
+  %section
+    %p.title
+      = link_to "Отзывы", "#"
+    .content
+      %p

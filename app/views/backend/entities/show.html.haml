@@ -45,8 +45,8 @@
           .th
             = image_tag @entity.manufacturer.image_url if @entity.manufacturer.image?
             %br
-          .label= @entity.manufacturer.name
-        = @entity.manufacturer.description
+          .label= @entity.manufacturer_name
+        = @entity.manufacturer_description
       %br
       %br
       .row.collapse

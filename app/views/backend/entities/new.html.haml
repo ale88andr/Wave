@@ -2,6 +2,7 @@
 .small-10.large-12
   .label= @category.name
   %h3.subheader Добавление нового товара :
+  %hr
   = render 'form', locals: { button_label: 'Добавить товар' }
   .sub-nav
     %dt Дополнительно :

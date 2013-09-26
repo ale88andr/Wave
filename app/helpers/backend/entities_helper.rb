@@ -6,4 +6,8 @@
   def getTechnologies
   	Technology.all
   end
+
+  def trim text
+    text.truncate(100, separator: '/', omission: '...') unless text.nil?
+  end
 end

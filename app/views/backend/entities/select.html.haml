@@ -1,6 +1,7 @@
 - provide(:title, "Выбор категории товаров")
 .small-10.large-12
-  %h3.subheader Выбрать категорию товаров :
+  %h2= link_to 'Создание товара / Выбор категории :', '#'
+  %hr
   = render 'select_form'
   .sub-nav
     %dt Дополнительно :
