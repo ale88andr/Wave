@@ -1,3 +1,7 @@
-- provide(:title, "Производители категории '#{@presenter.category_name}'")
-- @manufacturers.each do |manufacturer|
-	= "#{manufacturer.name} (#{@manufacturers_inc.size})"
+- provide(:title, "Производители категории '#{@presenter.current_category.name}'")
+%h4.subheader= "Найденно производителей: #{@presenter.category_manufacturers.size}, всего товаров: #{@presenter.quantity_products} "
+%hr
+- @presenter.category_manufacturers.each do |manufacturer|
+	= image_tag manufacturer.image_url if manufacturer.image?
+	= link_to "#{manufacturer.name} (#{manufacturer.entities.size})", category_manufacturer_path(@presenter.current_category, manufacturer)
+	%br

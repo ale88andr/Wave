@@ -1,10 +1,19 @@
 - provide(:title, "Просмотр категории #{@category.name}")
 .row.collapse
   .large-12.small-12
-    %h3.subheader= link_to @category.parent.name, category_path(@category.parent) if @category.try(:parent)
-    %h2= @category.name
-    %label= link_to "#{@category.name} -> Все производители ", category_manufacturers_path(@category)
-    - unless @category.entities.empty?
-      = render partial: 'entity_prewiew', locals: { entity_category_collection: @category.entities }
+    %h4.subheader= link_to @category.parent.name, category_path(@category.parent) if @category.try(:parent)
+    %h4.subheader= @category.name
+    - if @category.try(:parent)
+      %span= "Содержит товаров: #{@category.entities.size}"
+      %hr
+      %label= link_to "#{@category.name} -> Все производители ", category_manufacturers_path(@category)
+      - unless @category.entities.empty?
+        = render partial: 'entity_prewiew', locals: { entity_category_collection: @category.entities }
+      - else
+        %span.alert В данной категории товары пока недоступны!
     - else
-      %span.alert В данной категории товары пока недоступны!
+      %span= "Содержит подкатегорий: #{@category.subcategories.size}"
+      %hr
+      - @category.subcategories.each do |subcat|
+        = link_to "#{subcat.name} (#{subcat.entities.size})", category_path(subcat)
+        %br

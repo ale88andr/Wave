@@ -14,8 +14,8 @@ class Manufacturers::IndexPresenter
     @manufacturers_all.uniq
   end
 
-  def category_name
-    category_manufacturers.first.categories.first.name
+  def current_category
+    category_manufacturers.first.categories.first
   end
 
   memoize :category_manufacturers
