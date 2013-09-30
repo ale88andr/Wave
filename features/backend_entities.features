@@ -9,11 +9,15 @@ Feature: Manage entities
 
   Scenario: Visiting #select
     Given there are created the following categories:
-      | First category  |
-      | Second category |
-      | Third category  |
-    When I go to the entity new link
+      # name: name of category, parent: 0 - parent, other - id of parent
+      | name            | parent |
+      | First category  | 0      |
+      | Second category | 1      |
+      | Third category  | 1      |
+    When I go to 'Entity category select backend page'
     Then I should see a page with category selector which include:
+      # name: name of category
+      | name            |
       | First category  |
       | Second category |
       | Third category  |
@@ -21,12 +25,37 @@ Feature: Manage entities
 
   Scenario: Adding new entity
     Given there are created the following categories:
-      | Displays |
-    And There are created the following attributes in "Displays" category
+      # name: name of category
+      | name     | parent |
+      | Parent   | 0      |
+      | Displays | 1      |
+    And There are created the following attributes in Displays category
+      # name: name of attribute
+      | name             |
       | First attribute  |
       | Second attribute |
       | Third attribute  |
-    When I go to the entity new link
-    And I choose category "Displays"
-    And I click commit button
-    Then I should be redirected to new entity form with "Displays" catetegory attributes
+    When I go to 'New Entity backend page'
+    And I should see a choosing categories form
+    But Parent category should be disabled
+    Then I select category Displays and click commit button
+    And I should be redirected to new entity form with "Displays" catetegory attributes
+
+  Scenario: Filling new entity form with valid data
+    Given there are created the following categories:
+      # name: name of category
+      | name     | parent |
+      | Displays | 1      |
+    And There are created the following attributes in Displays category
+      # name: name of attribute
+      | name             |
+      | First attribute  |
+      | Second attribute |
+      | Third attribute  |
+    And There are created the following technologies:
+      # name: name of technology
+      | name           |
+      | technology 'X' |
+      | technology 'Y' |
+    And I visit new entity form
+    And I should see 

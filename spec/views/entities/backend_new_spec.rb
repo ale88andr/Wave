@@ -47,7 +47,6 @@ describe "backend/entities/new" do
 
     # attributes
     context "build category attributes" do
-
       it "attributes id" do
         category.eav_attributes.each_with_index do |attribute, index|
           expect(find("entity[parameters_attributes][#{index}][attribute_id]").value).to eq attribute.id

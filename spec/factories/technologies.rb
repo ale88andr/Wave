@@ -2,8 +2,8 @@
 
 FactoryGirl.define do
   factory :technology do
-    name "MyString"
-    description "MyText"
-    label "MyString"
+    sequence(:name) { |n| "Technology #{n}"}
+    description 		"Description technology"
+    label 					"path/to/label"
   end
 end
