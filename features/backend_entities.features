@@ -76,3 +76,4 @@ Feature: Manage entities
       | Third attribute  | Value 3 |
     # And I check "technology 'X'" product technology
     Then On click commit button new entity should be added
+    And This page should be "Product" entity page

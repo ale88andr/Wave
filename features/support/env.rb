@@ -9,6 +9,7 @@ Spork.prefork do
 
   ENV["RAILS_ENV"] ||= "test"
   require File.expand_path(File.dirname(__FILE__) + '/../../config/environment')
+  # require File.join(File.dirname(__FILE__), 'shared_steps')
   require 'cucumber/rails/world'
   require 'capybara/rails'
   require 'capybara/cucumber'
