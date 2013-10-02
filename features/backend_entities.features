@@ -57,5 +57,22 @@ Feature: Manage entities
       | name           |
       | technology 'X' |
       | technology 'Y' |
+    And There are created the following manufacturers:
+      # name: name of manufacturer
+      | name         |
+      | manufacturer |
     And I visit new entity form
-    And I should see 
+    When I fill in form with valid data:
+      | field        | value                  |
+      | name         | Product                |
+      | description  | Description of Product |
+      | availability | 100                    |
+      | guarantee    | 36                     |
+      | price        | 1500                   |
+    And I fill in attributes fields :
+      | name             | value   |
+      | First attribute  | Value 1 |
+      | Second attribute | Value 2 |
+      | Third attribute  | Value 3 |
+    # And I check "technology 'X'" product technology
+    Then On click commit button new entity should be added
