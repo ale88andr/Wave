@@ -1,4 +1,14 @@
-﻿class Technology < ActiveRecord::Base
+﻿# == Schema Information
+#
+# Table name: technologies
+#
+#  id          :integer          not null, primary key
+#  name        :string(255)
+#  description :text
+#  label       :string(255)
+#
+
+class Technology < ActiveRecord::Base
   attr_accessible :description, :label, :name
   has_and_belongs_to_many :entities
 

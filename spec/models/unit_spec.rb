@@ -1,3 +1,11 @@
+# == Schema Information
+#
+# Table name: units
+#
+#  id    :integer          not null, primary key
+#  param :string(255)
+#
+
 require 'spec_helper'
 
 describe Unit do

@@ -1,4 +1,32 @@
-﻿class Entity < ActiveRecord::Base
+﻿# == Schema Information
+#
+# Table name: entities
+#
+#  id                      :integer          not null, primary key
+#  name                    :string(255)
+#  price                   :float
+#  price_in_currency       :float
+#  bind_price              :boolean          default(FALSE), not null
+#  currency_id             :integer
+#  description             :text
+#  discount_id             :integer
+#  price_start_date        :date
+#  price_end_date          :date
+#  image                   :string(255)
+#  published               :boolean          default(TRUE), not null
+#  advise                  :string(255)
+#  additional_shiping_cost :float
+#  views                   :integer
+#  rate                    :integer
+#  characteristics         :text
+#  manufacturer_id         :integer
+#  category_id             :integer
+#  availability            :integer
+#  guarantee               :integer
+#  created_at              :datetime         not null
+#  updated_at              :datetime         not null
+
+class Entity < ActiveRecord::Base
   belongs_to :currency
   belongs_to :discount
   belongs_to :manufacturer
@@ -6,6 +34,7 @@
 
   has_many  :attributes, through: :parameters
   has_many  :parameters, dependent: :destroy
+  has_many  :discussions, dependent: :destroy
 
   accepts_nested_attributes_for :parameters
 

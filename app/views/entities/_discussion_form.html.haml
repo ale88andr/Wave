@@ -1,0 +1,22 @@
+.subheader 
+  %b #{current_user.name}
+  , оставьте свой отзыв о товаре '#{@entity.name}'
+  .small-8.large-8.collapse
+    %fieldset 
+      %legend Оставить отзыв
+      = form_for ([@entity.category, @entity, @entity.discussions.build]) do |f|
+        = render "common/errors", object: f.object if f.object.errors.any?
+        .field
+          = f.label :comment, "Введите содержимое комментария :"
+          = f.text_area :comment
+        %br
+        .field
+          = f.label :positive, "Плюсы :"
+          = f.text_area :positive
+        %br
+        .field
+          = f.label :negative, "Минусы :"
+          = f.text_area :negative
+        %br
+        .field
+          = f.submit "Отправить комментарий", class:"button radius small"

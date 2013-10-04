@@ -1,16 +1,10 @@
 Wave::Application.routes.draw do
 
-  get "manufacturers/index"
+  get "discussions/create"
 
-  get "manufacturers/show"
-
-  get "categories/index"
-
-  get "categories/show"
-
-	# Backend
-	namespace :backend do
-		resources :users do
+  # Backend
+  namespace :backend do
+    resources :users do
       get 'privileges', action: :privileges
     end
     resources :attributes, :units, :manufacturers, :technologies, except: :show
@@ -26,7 +20,7 @@ Wave::Application.routes.draw do
       get "select", on: :collection
       put "redirect_to_new_with_category", on: :collection
     end
-	end
+  end
 
   # Devise
   devise_for :users, :path => '', :path_names => {:sign_in => 'login', :sign_out => 'logout', :sign_up => 'register'}
@@ -34,7 +28,9 @@ Wave::Application.routes.draw do
   resources :profiles, only: :show
   resources :categories, only: [:index, :show] do
     resources :manufacturers, only: [:index, :show]
-    resources :entities, only: [:index, :show], :path => "product"
+    resources :entities, only: [:index, :show], :path => "product" do
+      resources :discussions, :only => [:create]
+    end
   end
 
   root :to => 'general#index'

@@ -1,3 +1,12 @@
+# == Schema Information
+#
+# Table name: attributes
+#
+#  id      :integer          not null, primary key
+#  name    :string(255)
+#  unit_id :integer
+#
+
 require 'spec_helper'
 
 describe Attribute do

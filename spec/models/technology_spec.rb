@@ -1,3 +1,13 @@
+# == Schema Information
+#
+# Table name: technologies
+#
+#  id          :integer          not null, primary key
+#  name        :string(255)
+#  description :text
+#  label       :string(255)
+#
+
 require 'spec_helper'
 
 describe Technology do

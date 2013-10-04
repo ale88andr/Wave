@@ -1,4 +1,15 @@
-﻿class Manufacturer < ActiveRecord::Base
+﻿# == Schema Information
+#
+# Table name: manufacturers
+#
+#  id          :integer          not null, primary key
+#  name        :string(255)
+#  description :text
+#  url         :string(255)
+#  image       :string(255)
+#
+
+class Manufacturer < ActiveRecord::Base
   attr_accessible :description, :image, :name, :url
 
   has_many :entities

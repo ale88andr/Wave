@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130920101154) do
+ActiveRecord::Schema.define(:version => 20131004085408) do
 
   create_table "attributes", :force => true do |t|
     t.string  "name"
@@ -42,6 +42,20 @@ ActiveRecord::Schema.define(:version => 20130920101154) do
     t.string "abbreviation"
     t.float  "ratio"
   end
+
+  create_table "discussions", :force => true do |t|
+    t.integer  "user_id"
+    t.integer  "entity_id"
+    t.text     "comment"
+    t.text     "positive"
+    t.text     "negative"
+    t.integer  "answer"
+    t.datetime "created_at", :null => false
+    t.datetime "updated_at", :null => false
+  end
+
+  add_index "discussions", ["entity_id"], :name => "index_discussions_on_entity_id"
+  add_index "discussions", ["user_id"], :name => "index_discussions_on_user_id"
 
   create_table "entities", :force => true do |t|
     t.string   "name"

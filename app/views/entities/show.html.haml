@@ -1,0 +1,87 @@
+- provide(:title, "Просмотр товара #{@entity.name} ##{@entity.id}")
+.radius.secondary.label= link_to @entity.category.name, backend_category_path(@entity.category.id)
+.radius.secondary.label= link_to @entity.manufacturer.name, backend_manufacturer_path(@entity.manufacturer.id)
+%h3.subheader= @entity.name
+%hr
+.label Описание товара >
+.row.collapse
+  .small-5.large-5.columns
+    = image_tag @entity.image.nil? ? "/img/entity/default.jpg" : @entity.image.url, size: "400x300"
+  .small-6.large-6.columns
+    %b= @entity.name
+    %br
+    %br
+    .panel
+      .label Краткие характеристики:
+      %br
+      = @entity.characteristics
+      %br
+    - unless @entity.technology_ids.empty?
+      - @entity.technologies.each do |technology|
+        = image_tag technology.label_url
+    %br
+    %br
+    %b Гарантия :
+    = "#{@entity.guarantee} Месяцев"
+    %br
+    %br
+    .price
+      = @entity.price
+
+%br
+%br
+
+.section-container.auto{ data: { :section => '' } }
+  %section
+    %p.title{ data: { section_title: '' }}= link_to 'Описание товара', "#panel1"
+    .content{ data: { section_content: '' }}
+      %h3.subheader= @entity.name
+      %hr
+      %br
+      .row.collapse
+        .small-2.large-2.columns
+          .th
+            = image_tag @entity.manufacturer.image_url if @entity.manufacturer.image?
+            %br
+          .label= @entity.manufacturer_name
+        = @entity.manufacturer_description
+      %br
+      %br
+      .row.collapse
+        %span.radius.secondary.label Информация о товаре :
+        %br
+        %br
+        = @entity.description
+
+  %section
+    %p.title{ data: { section_title: '' }}= link_to 'Характеристики', "#panel2"
+    .content{ data: { section_content: '' }}
+      %h5.subheader Технические характеристики : #{@entity.name}
+      %hr
+      %br
+      %table
+        %thead
+          %tr
+            %th Характеристика :
+            %th Значение :
+        %tbody
+          - @entity.parameters.each do |param|
+            %tr
+              %td= param.attribute.name
+              %td= param.value + " " + param.attribute.unit.try(:param).to_s
+      %br
+      %span.subheader * Характеристики и комплектация товара могут изменяться производителем без уведомления
+
+  %section
+    %p.title{ data: { section_title: '' }}= link_to "Обсуждение (#{@entity.discussions.size})", "#panel3"
+    .content{ data: { section_content: '' }}
+      - if @entity.discussions.empty?
+        %h5.subtitle "Пока никто не оставил отзывов !"
+      - else
+        .discussion
+          = render @entity.discussions
+      = render "discussion_form"
+
+  %section
+    %p.title{ data: { section_title: '' }}= link_to 'Доставка', "#panel4"
+    .content{ data: { section_content: '' }}

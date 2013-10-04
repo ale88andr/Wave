@@ -1,3 +1,14 @@
+# == Schema Information
+#
+# Table name: manufacturers
+#
+#  id          :integer          not null, primary key
+#  name        :string(255)
+#  description :text
+#  url         :string(255)
+#  image       :string(255)
+#
+
 require 'spec_helper'
 
 describe Manufacturer do

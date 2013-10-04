@@ -1,4 +1,12 @@
-﻿class Unit < ActiveRecord::Base
+﻿# == Schema Information
+#
+# Table name: units
+#
+#  id    :integer          not null, primary key
+#  param :string(255)
+#
+
+class Unit < ActiveRecord::Base
   attr_accessible :param
 
   has_many :eav_attributes, class_name: "Attribute"
