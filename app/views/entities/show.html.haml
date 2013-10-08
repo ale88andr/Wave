@@ -26,7 +26,11 @@
     %br
     %br
     .price
-      = @entity.price
+      - if @entity.bind_price
+        = @entity.price_in_currency
+      - else
+        = @entity.price
+        = @entity.currency_abbreviation
 
 %br
 %br
@@ -76,7 +80,7 @@
     %p.title{ data: { section_title: '' }}= link_to "Обсуждение (#{@entity.discussions.size})", "#panel3"
     .content{ data: { section_content: '' }}
       - if @entity.discussions.empty?
-        %h5.subtitle "Пока никто не оставил отзывов !"
+        %h5.subtitle Пока никто не оставил отзывов!
       - else
         .discussion
           = render @entity.discussions

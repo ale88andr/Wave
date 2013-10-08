@@ -12,5 +12,7 @@
           %br
           = link_to entity.manufacturer_name, category_manufacturer_path(@category, entity.manufacturer)
         %li.bullet-item= entity.characteristics
-        %li.price $99.99
+        %li.price
+          = entity.price
+          = entity.currency_abbreviation
         %li.cta-button= link_to "Подробнее", category_entity_path(@category, entity), class: "button radius"

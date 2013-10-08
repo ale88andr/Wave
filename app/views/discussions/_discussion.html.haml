@@ -2,10 +2,10 @@
   = image_tag discussion.user.avatar.url.nil? ? "/img/users/default_user_avatar.jpg" : @user.avatar.url, size: "50x50"
 .large-5.columns
   .row.collapse
-    .large-4.columns.header
-      %b= discussion.user.name
-    .large-6.columns.date
-      %i= discussion.created_at
+    .large-10.columns.header
+      %b= link_to discussion.user.name
+      |
+      %span.discussion-date= format_profile_date discussion.created_at
   %br
   = discussion.comment
 %br

@@ -12,7 +12,7 @@
 	end
 
 	def rescue_empty_field field
-		field == '' || field.nil? ? "Не указанно" : field
+		field == '' || field.presence ? "Не указанно" : field
 	end
 
 	def get_permission_name(permission_id)

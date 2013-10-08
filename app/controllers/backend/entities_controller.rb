@@ -1,5 +1,6 @@
 ﻿class Backend::EntitiesController < Backend::ApplicationController
   before_filter(only: [:show, :edit, :destroy, :update]) { |m| m.get_entity_by_id(params[:id]) }
+
   def new
     unless params.has_key?(:category_id)
       redirect_to select_backend_entities_path, notice: 'Сначала выберите категорию!'
@@ -31,7 +32,7 @@
   end
 
   def index
-    @entities = Entity.last_by_date
+    @entities = Entity.chronology()
   end
 
   def edit

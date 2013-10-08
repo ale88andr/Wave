@@ -42,32 +42,40 @@ class Entity < ActiveRecord::Base
 
   attr_accessible :additional_shiping_cost, :advise, :availability, :bind_price, :characteristics, :description, :guarantee, :image, :name, :price, :price_end_date, :price_in_currency, :price_start_date, :published, :rate, :views, :category_id, :manufacturer_id, :parameters_attributes, :technology_ids
 
-  before_save :set_characteristics_from_parameters_attributes
+  before_save :set_characteristics_from_parameters_attributes, :set_currency
 
   # technologies macros
-  delegate  :description, 
-            :label, 
-            :name, 
-            to: :technologies, 
-            allow_nil: true, 
+  delegate  :description,
+            :label,
+            :name,
+            to: :technologies,
+            allow_nil: true,
             prefix: true
 
   # category macros
-  delegate  :active, 
-            :description, 
-            :name, 
+  delegate  :active,
+            :description,
+            :name,
             :parent_id,
-            to: :category, 
-            allow_nil: true, 
+            to: :category,
+            allow_nil: true,
             prefix: true
 
   # manufacturer macros
-  delegate  :description, 
-            :image, 
-            :name, 
+  delegate  :description,
+            :image,
+            :name,
             :url,
-            to: :manufacturer, 
-            allow_nil: true, 
+            to: :manufacturer,
+            allow_nil: true,
+            prefix: true
+
+  # manufacturer macros
+  delegate  :name,
+            :abbreviation,
+            :ratio,
+            to: :currency,
+            allow_nil: true,
             prefix: true
 
   validates :name, presence:{ message:'Это поле должно быть заполненно!' }, uniqueness:{ message:'Такое имя уже существует!' }
@@ -76,10 +84,14 @@ class Entity < ActiveRecord::Base
   validates :price, allow_nil: true, numericality: { message: " - Это поле должно содержать только цифровые значения", greater_than: 0}
   validates :price_in_currency, allow_nil: true, numericality: { message: " - Это поле должно содержать только цифровые значения", greater_than: 0}
 
-  scope :last_by_date, order("created_at DESC")
+  scope :chronology, lambda { |increase = nil| where(published: true).order("created_at #{increase ? 'ASC' : 'DESC'}") }
 
   def set_characteristics_from_parameters_attributes
     self.characteristics = self.parameters.map { |e| e.value.to_s + e.attribute.unit.try(:param).to_s }.join(" / ")
+  end
+
+  def set_currency
+    self.currency_id = self.bind_price ? Currency.first.id : Currency.last.id
   end
 
 end

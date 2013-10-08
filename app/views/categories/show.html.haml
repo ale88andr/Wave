@@ -4,7 +4,7 @@
     %h4.subheader= link_to @category.parent.name, category_path(@category.parent) if @category.try(:parent)
     %h4.subheader= @category.name
     - if @category.try(:parent)
-      %span= "Содержит товаров: #{@category.entities.size}"
+      %span.subcategory= "Показанно товаров: #{@category.entities.size}"
       %hr
       %label= link_to "#{@category.name} -> Все производители ", category_manufacturers_path(@category)
       - unless @category.entities.empty?
