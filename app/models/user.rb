@@ -37,6 +37,7 @@ class User < ActiveRecord::Base
   accepts_nested_attributes_for :profile
 
   has_many :discussions
+  has_many :carts
 
   delegate  :show_email,
             :birthday,

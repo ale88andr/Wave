@@ -31,7 +31,10 @@ Wave::Application.routes.draw do
     resources :entities, only: [:index, :show], :path => "product" do
       resources :discussions, :only => [:create]
     end
+    get '/:option', action: :show, on: :member
   end
+
+  resources :orders, :carts
 
   root :to => 'general#index'
 

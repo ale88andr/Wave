@@ -7,6 +7,12 @@
       %span.subcategory= "Показанно товаров: #{@category.entities.size}"
       %hr
       %label= link_to "#{@category.name} -> Все производители ", category_manufacturers_path(@category)
+      %ul#drop.f-dropdown.content.open{ data: { dropdown_content: '' } }
+        %li= link_to "Новинки", category_path(@category) + '/newest'
+        %li= link_to "От дешёвых к дорогим", category_path(@category) + '/cheap'
+        %li= link_to "От дорогих к дешёвым", category_path(@category) + '/hight'
+        %li= link_to "Популярные", category_path(@category) + '/popular'
+      = link_to "Сортировать", '#', class: "small secondary radius button dropdown", data: { dropdown: 'drop' }
       - unless @category.entities.empty?
         = render partial: 'entity_prewiew', locals: { entity_category_collection: @category.entities }
       - else

@@ -7,7 +7,17 @@
       |
       %span.discussion-date= format_profile_date discussion.created_at
   %br
-  = discussion.comment
+  %p= discussion.comment
+  - if discussion.positive.presence
+    %p.positive
+      %b Плюсы:
+      %br
+      = discussion.positive
+  - if discussion.negative.presence
+    %p.negative
+      %b Минусы:
+      %br
+      = discussion.negative
 %br
 %br
 %br

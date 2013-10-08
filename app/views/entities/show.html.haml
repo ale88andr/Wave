@@ -1,6 +1,6 @@
 - provide(:title, "Просмотр товара #{@entity.name} ##{@entity.id}")
 .radius.secondary.label= link_to @entity.category.name, backend_category_path(@entity.category.id)
-.radius.secondary.label= link_to @entity.manufacturer.name, backend_manufacturer_path(@entity.manufacturer.id)
+.radius.secondary.label= link_to @entity.manufacturer.name, category_manufacturer_path(@entity.category, @entity.manufacturer)
 %h3.subheader= @entity.name
 %hr
 .label Описание товара >
@@ -25,12 +25,14 @@
     = "#{@entity.guarantee} Месяцев"
     %br
     %br
-    .price
+    .price.panel
       - if @entity.bind_price
         = @entity.price_in_currency
       - else
         = @entity.price
         = @entity.currency_abbreviation
+        %p.currency= exchange @entity.price
+    = button_to "Заказать", orders_path(entity_id: @entity), class: "button radius medium"
 
 %br
 %br

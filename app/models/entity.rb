@@ -35,6 +35,7 @@ class Entity < ActiveRecord::Base
   has_many  :attributes, through: :parameters
   has_many  :parameters, dependent: :destroy
   has_many  :discussions, dependent: :destroy
+  has_many  :orders
 
   accepts_nested_attributes_for :parameters
 
@@ -43,6 +44,7 @@ class Entity < ActiveRecord::Base
   attr_accessible :additional_shiping_cost, :advise, :availability, :bind_price, :characteristics, :description, :guarantee, :image, :name, :price, :price_end_date, :price_in_currency, :price_start_date, :published, :rate, :views, :category_id, :manufacturer_id, :parameters_attributes, :technology_ids
 
   before_save :set_characteristics_from_parameters_attributes, :set_currency
+  before_destroy :ensure_not_referenced_by_any_order
 
   # technologies macros
   delegate  :description,
@@ -70,7 +72,7 @@ class Entity < ActiveRecord::Base
             allow_nil: true,
             prefix: true
 
-  # manufacturer macros
+  # currency macros
   delegate  :name,
             :abbreviation,
             :ratio,
@@ -85,6 +87,12 @@ class Entity < ActiveRecord::Base
   validates :price_in_currency, allow_nil: true, numericality: { message: " - Это поле должно содержать только цифровые значения", greater_than: 0}
 
   scope :chronology, lambda { |increase = nil| where(published: true).order("created_at #{increase ? 'ASC' : 'DESC'}") }
+  scope :newest_by, lambda { |date = 1.week.ago| where("created_at >= ?", date).chronology }
+  scope :by_rate, lambda { |top = true| chronology.order("rate #{top ? 'ASC' : 'DESC'}") }
+  scope :unpublished, where("published: false")
+  scope :price_range, lambda { |range_up = 0, range_to = 999999| where(price: range_up..range_to) }
+  scope :price, lambda { |cheap| order("price #{cheap ? 'ASC' : 'DESC'}").chronology }
+  scope :popular, chronology.order("views DESC")
 
   def set_characteristics_from_parameters_attributes
     self.characteristics = self.parameters.map { |e| e.value.to_s + e.attribute.unit.try(:param).to_s }.join(" / ")
@@ -93,5 +101,16 @@ class Entity < ActiveRecord::Base
   def set_currency
     self.currency_id = self.bind_price ? Currency.first.id : Currency.last.id
   end
+
+  private
+
+    def ensure_not_referenced_by_any_order
+      if orders.empty?
+        return true
+      else
+        errors.add(:base, 'Существуют товарные позиции в заказах')
+        return false
+      end
+    end
 
 end

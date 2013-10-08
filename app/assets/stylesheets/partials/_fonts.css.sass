@@ -1,8 +1,21 @@
+$large: 32px
+$medium-hight: 26px
+$medium: 24px
+$medium-light: 20px
+$small: 16px
+$tiny: 12px
+
 #footer
   :text-transform uppercase
   :font-weight 700
-  :font-size 14px
+  :font-size $tiny + 2
 
 .discussion-date
-  :font-size 11px
+  :font-size $tiny - 1
   :color #333
+
+.price
+  :font-size $medium-hight
+
+  .currency
+    :font-size $small + 2

@@ -2,7 +2,7 @@
   - entity_category_collection.each do |entity|
     %li
       %ul.pricing-table
-        = image_tag entity.image.nil? ? "/img/entity/default.jpg" : entity.image.url
+        = link_to pic(entity), category_entity_path(@category, entity)
         %li.bullet-item= link_to entity.name, category_entity_path(@category, entity)
         %li.bullet-item
           - unless entity.try(:technology_ids).empty?
@@ -11,7 +11,7 @@
             %br
           %br
           = link_to entity.manufacturer_name, category_manufacturer_path(@category, entity.manufacturer)
-        %li.bullet-item= entity.characteristics
+        %li.bullet-item= trim entity.characteristics
         %li.price
           = entity.price
           = entity.currency_abbreviation
