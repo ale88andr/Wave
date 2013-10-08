@@ -1,10 +1,9 @@
 source 'https://rubygems.org'
 
-ruby "1.9.3"
-
+ruby '1.9.3'
 gem 'rails', '3.2.13'
 
-gem :production do
+group :production do
   gem 'pg'
 end
 
