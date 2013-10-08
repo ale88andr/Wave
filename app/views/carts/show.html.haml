@@ -1,0 +1,30 @@
+- provide(:title, "Корзина пользователя #{@cart.users.name if @cart.users.presence}")
+%h5.subheader= "Ваша корзина (позиций: #{@cart.orders.size})"
+.large-12.small-12
+  %br
+  - unless @cart.orders.empty?
+    %table
+      %thead
+        %tr
+          %th Товар :
+          %th Цена(за ед.) :
+          %th Количество :
+          %th Цена к оплате :
+          %th Меню :
+      %tbody
+        - @cart.orders.each do |order|
+          %tr
+            %td= link_to order.entity.name, category_entity_path(order.entity.category, order.entity)
+            %td
+              = order.entity.price
+              = order.entity.currency.abbreviation
+            %td= order.quantity
+            %td
+              = order.total_price
+              = order.entity.currency.abbreviation
+            %td= link_to "удалить", "#"
+    .total
+      %label Всего к оплате: #{@cart.total_price}
+    = button_to 'Удалить корзину', @cart, method: :delete, confirm: 'Are you sure?', class: "button alert round"
+  - else
+    %p.nothing Корзина покупок пуста, закажите товары для наполнения корзины
