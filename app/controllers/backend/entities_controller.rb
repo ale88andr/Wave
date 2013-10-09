@@ -24,6 +24,7 @@
     if @entity.save
       redirect_to backend_entity_path(@entity), notice: "Товар '#{@entity.name}' создан"
     else
+      @category = @entity.category
       flash[:error] = "Не удалось добавить товар!" and render :new
     end
   end

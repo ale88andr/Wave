@@ -43,6 +43,8 @@ class Entity < ActiveRecord::Base
 
   attr_accessible :additional_shiping_cost, :advise, :availability, :bind_price, :characteristics, :description, :guarantee, :image, :name, :price, :price_end_date, :price_in_currency, :price_start_date, :published, :rate, :views, :category_id, :manufacturer_id, :parameters_attributes, :technology_ids
 
+  mount_uploader :image, ImageUploader
+
   before_save :set_characteristics_from_parameters_attributes, :set_currency
   before_destroy :ensure_not_referenced_by_any_order
 
