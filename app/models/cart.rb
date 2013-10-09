@@ -2,7 +2,7 @@ class Cart < ActiveRecord::Base
   attr_accessible :user_id
 
   has_many :orders, dependent: :destroy
-  belongs_to :users
+  belongs_to :user
 
   def total_price
     orders.to_a.sum { |order| order.total_price }

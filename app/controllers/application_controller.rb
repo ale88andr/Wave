@@ -13,13 +13,13 @@ class ApplicationController < ActionController::Base
       render 'public/404', status: 404
     end
 
-		def current_cart
+    def current_cart
       cur = session[:cart_id].nil? ? 0 : session[:cart_id]
-			Cart.find(cur)
-		rescue
-			cart = Cart.create(user_id: current_user.id ||= 0)
+      Cart.find(cur)
+    rescue
+      cart = Cart.create(user_id: current_user.id ||= 0)
       session[:cart_id] = cart.id
-			cart
-		end
+      cart
+    end
 
 end

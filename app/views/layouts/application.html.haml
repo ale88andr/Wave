@@ -19,12 +19,11 @@
       = render 'common/header'
       = render 'common/notice'
       .row.collapse
-        .small-9.large-9.columns
+        .small-12.large-12.columns
           = yield
-        .small-3.large-2.columns.large-offset-1
-          = render 'common/right_widget'
 
       = javascript_include_tag "application"
 
     = render "common/footer"
     = debug(params) if Rails.env.development?
+    = render "common/cart"

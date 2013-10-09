@@ -1,4 +1,4 @@
-- provide(:title, "Корзина пользователя #{@cart.users.name if @cart.users.presence}")
+- provide(:title, "Корзина пользователя #{@cart.user.name if @cart.user.presence}")
 %h5.subheader= "Ваша корзина (позиций: #{@cart.orders.size})"
 .large-12.small-12
   %br

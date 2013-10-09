@@ -1,0 +1,37 @@
+.reveal-modal.medium#myModal
+  - if current_cart?
+    - cart = get_current_cart
+    %h2.subheader Корзина заказов(позиций: #{cart.orders.size})
+    %p.lead
+      - if cart.user.name.presence
+        = "Здраствуйте, #{cart.user.name.capitalize}, Вы заказали следующие товарные позиции :"
+      - else
+        Ваш заказ содержит следующие товарные позиции :
+      %br
+      - unless @cart.orders.empty?
+        %table
+          %thead
+            %tr
+              %th Товар :
+              %th Цена(за ед.) :
+              %th Количество :
+              %th Цена к оплате :
+              %th Меню :
+          %tbody
+            - @cart.orders.each do |order|
+              %tr
+                %td= link_to order.entity.name, category_entity_path(order.entity.category, order.entity)
+                %td
+                  = order.entity.price
+                  = order.entity.currency.abbreviation
+                %td= order.quantity
+                %td
+                  = order.total_price
+                  = order.entity.currency.abbreviation
+                %td= link_to "удалить", "#"
+      .total
+        %label Всего к оплате: #{@cart.total_price}
+      = button_to 'Удалить корзину', @cart, method: :delete, confirm: 'Are you sure?', class: "button alert round"
+  - else
+    Ваша корзина пуста, сперва закажите товар
+  %a.close-reveal-modal &#215;

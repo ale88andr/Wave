@@ -21,6 +21,8 @@ class Discussion < ActiveRecord::Base
 
   validates :comment, presence: { message: 'Это поле должно быть заполненно!' }
 
+  scope :last, lambda { |lim| order("created_at DESC").limit(lim) }
+
   protected
   	def self.create_entity_discussion_by_user (author, subject, discuss)
   		discuss = author.discussions.new(discuss) unless author.nil?
