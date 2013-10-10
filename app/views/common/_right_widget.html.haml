@@ -4,7 +4,8 @@
       = link_to "Меню", "#"
     .content
       %ul.side-nav
-        %label Категории товаров :
+        %label &sect; Категории товаров :
+        %li.divider
         - getParentCategories.each do |parent|
           %li= link_to parent.name, category_path(parent)
           %li.divider
@@ -12,9 +13,23 @@
     %p.title
       = link_to "Обзоры", "#"
     .content
-      %p
+      %ul.side-nav
+        %label Not available
   %section
     %p.title
       = link_to "Отзывы", "#"
     .content
-      %p
+      %ul.side-nav
+        %label Последние отзывы:
+        - if @presenter.presence
+          - @presenter.recent_discussions.each do |discuss|
+            %li
+              %b= link_to discuss.user.name, profile_path(discuss.user) 
+              .comment_widget
+                &#9997;
+                = discuss.comment
+              .comment_to 
+                .large-4.columns о товаре: 
+                .large-8.columns= link_to discuss.entity.name, category_entity_path(discuss.entity.category, discuss.entity)
+              %br
+            %li.divider

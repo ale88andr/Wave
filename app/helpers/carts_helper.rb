@@ -8,6 +8,6 @@ module CartsHelper
 	end
 
 	def get_current_cart cart_id = session[:cart_id]
-		Cart.find_by_id(session[:cart_id])
+		Cart.find_by_id(cart_id)
 	end
 end

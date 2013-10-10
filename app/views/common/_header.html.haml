@@ -47,4 +47,4 @@
         %li= link_to "Войти", new_user_session_path
     %ul.right
       %li
-        %a.reveal-link{href: '#', data: {reveal_id: "myModal"}} Моя корзина
+        %a.reveal-link{href: '#', data: {reveal_id: "myModal"}} Моя корзина(#{get_current_cart.orders.size})

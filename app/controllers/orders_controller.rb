@@ -9,4 +9,9 @@
     end
   end
 
+  def destroy
+  	@order = Order.find_by_id(params[:id])
+  	@order.destroy and redirect_to cart_path(session[:cart_id])
+  end
+
 end

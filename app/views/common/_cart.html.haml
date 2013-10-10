@@ -8,7 +8,7 @@
       - else
         Ваш заказ содержит следующие товарные позиции :
       %br
-      - unless @cart.orders.empty?
+      - unless cart.orders.empty?
         %table
           %thead
             %tr
@@ -18,7 +18,7 @@
               %th Цена к оплате :
               %th Меню :
           %tbody
-            - @cart.orders.each do |order|
+            - cart.orders.each do |order|
               %tr
                 %td= link_to order.entity.name, category_entity_path(order.entity.category, order.entity)
                 %td
@@ -28,10 +28,14 @@
                 %td
                   = order.total_price
                   = order.entity.currency.abbreviation
-                %td= link_to "удалить", "#"
+                %td= link_to "удалить", order, method: :delete, confirm: "Удалить позицию #{order.entity.name} ?"
+      - else
+        .no-item.subheader В вашей корзине пока нет заказанных товаров
       .total
-        %label Всего к оплате: #{@cart.total_price}
-      = button_to 'Удалить корзину', @cart, method: :delete, confirm: 'Are you sure?', class: "button alert round"
+        %label
+          %b Всего к оплате: #{cart.total_price} грн.
+        %br
+      = button_to 'Удалить корзину', cart, method: :delete, confirm: 'Are you sure?', class: "button alert round"
   - else
     Ваша корзина пуста, сперва закажите товар
   %a.close-reveal-modal &#215;

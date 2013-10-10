@@ -13,13 +13,21 @@
           = link_to item.name, category_path(item), class: "header_link"
           %p= item.description
           %p.subheader.subcategory= "Подкатегорий: #{item.subcategories.size}"
+          - if item.subcategories.presence
+            - item.subcategories.each do |subcat|
+              &#215
+              = link_to "#{subcat.name}", category_path(subcat)
+              &#8594
+              %br
           %hr
-          %p.items-counter= "Товаров: #{item.total_entity_count}"
+          %p.items-counter
+            &#9829
+            = "Товаров: #{item.total_entity_count}"
     %br
     .newest.panel
-      %h4 Новинки :
+      %h4 &omega; Новинки :
       %hr
-      %ul.small-block-grid-2.large-block-grid-3.general-category
+      %ul.small-block-grid-2.large-block-grid-2.general-category
         - @presenter.recent_products.each do |product|
           %li.centered
             = link_to product.name, category_entity_path(product.category, product)

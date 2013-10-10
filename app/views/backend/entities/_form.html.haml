@@ -83,14 +83,6 @@
         %hr
       .large-12
         = render partial: 'technology', :locals => { :technologies => getTechnologies, :form => f }
-    %br
-    %br
-    .row.collapse
-      = image_tag(@entity.image_url) if @entity.image?
-      .small-4.large-3.columns
-        %span.prefix= f.label :image, "Выберите изображение товара"
-      .small-8.large-9.columns
-        = f.file_field :image
 
   %br
   %br
