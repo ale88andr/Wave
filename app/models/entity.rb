@@ -46,6 +46,8 @@ class Entity < ActiveRecord::Base
   before_save :set_characteristics_from_parameters_attributes, :set_currency
   before_destroy :ensure_not_referenced_by_any_order
 
+  mount_uploader :image, ImageUploader
+
   # technologies macros
   delegate  :description,
             :label,

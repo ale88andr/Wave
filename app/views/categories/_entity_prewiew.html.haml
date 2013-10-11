@@ -2,12 +2,15 @@
   - entity_category_collection.each do |entity|
     %li
       %ul.pricing-table
-        = link_to pic(entity), category_entity_path(@category, entity)
-        %li.bullet-item= link_to entity.name, category_entity_path(@category, entity)
+        %span.has-tip{data: {tooltip: ""}, title: entity.characteristics}
+          = link_to pic(entity), category_entity_path(@category, entity)
+        %li.bullet-item
+          %b= link_to entity.name, category_entity_path(@category, entity)
         %li.bullet-item
           - unless entity.try(:technology_ids).empty?
             - entity.technologies.each do |technology|
-              = image_tag technology.label_url
+              %span.tip-bottom{data: {tooltip: ""}, title: technology.description}
+                = image_tag technology.label_url
             %br
           %br
           = link_to entity.manufacturer_name, category_manufacturer_path(@category, entity.manufacturer)

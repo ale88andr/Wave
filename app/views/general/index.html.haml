@@ -16,7 +16,8 @@
           - if item.subcategories.presence
             - item.subcategories.each do |subcat|
               &#215
-              = link_to "#{subcat.name}", category_path(subcat)
+              %span.tip-bottom{data: {tooltip: ""}, title: rescue_if_description_empty(subcat.description)}
+                = link_to "#{subcat.name}", category_path(subcat)
               &#8594
               %br
           %hr

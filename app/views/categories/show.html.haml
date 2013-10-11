@@ -11,7 +11,7 @@
       %h5.subheader Производители
       %ul.small-block-grid-6.large-block-grid-6
         - @category.facturers.each do |obj|
-          %li= link_to image_tag(obj.manufacturer.image_url), category_manufacturer_path(@category, obj.manufacturer)
+          %li= link_to image_tag(obj.manufacturer.image_url), category_manufacturer_path(@category, obj.manufacturer), class: "th radius"
       %hr
       %ul#drop.f-dropdown.content.open{ data: { dropdown_content: '' } }
         %li= link_to "Новинки", category_path(@category) + '/newest'
