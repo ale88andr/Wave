@@ -44,7 +44,8 @@
       -else
         %li= link_to "Регистрация", new_user_registration_path
         %li.divider
-        %li= link_to "Войти", new_user_session_path
+        %li
+          %a.reveal-link{href: '#', data: {reveal_id: "enter"}} Войти
     %ul.right
       %li
-        %a.reveal-link{href: '#', data: {reveal_id: "myModal"}} Моя корзина(#{get_current_cart.orders.size})
+        %a.reveal-link{href: '#', data: {reveal_id: "myModal"}} Моя корзина(#{get_current_cart.nil? ? 0 : get_current_cart.orders.size})

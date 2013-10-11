@@ -22,9 +22,12 @@
             %td
               = order.total_price
               = order.entity.currency.abbreviation
-            %td= link_to "удалить", "#"
+            %td= link_to "удалить", order, method: :delete, confirm: "Удалить позицию #{order.entity.name}"
     .total
-      %label Всего к оплате: #{@cart.total_price}
+      %label
+        %b Всего к оплате: #{@cart.total_price} грн.
+      %br
     = button_to 'Удалить корзину', @cart, method: :delete, confirm: 'Are you sure?', class: "button alert round"
   - else
-    %p.nothing Корзина покупок пуста, закажите товары для наполнения корзины
+    %p.empty-cart Корзина покупок пуста, закажите товары для наполнения корзины
+    = link_to "Перейти в каталог", categories_path

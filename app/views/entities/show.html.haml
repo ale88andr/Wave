@@ -1,5 +1,5 @@
 - provide(:title, "Просмотр товара #{@entity.name} ##{@entity.id}")
-.radius.secondary.label= link_to @entity.category.name, backend_category_path(@entity.category.id)
+.radius.secondary.label= link_to @entity.category.name, category_path(@entity.category.id)
 .radius.secondary.label= link_to @entity.manufacturer.name, category_manufacturer_path(@entity.category, @entity.manufacturer)
 %h3.subheader= @entity.name
 %hr

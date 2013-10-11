@@ -14,10 +14,9 @@ class ApplicationController < ActionController::Base
     end
 
     def current_cart
-      cur = session[:cart_id].nil? ? 0 : session[:cart_id]
-      Cart.find(cur)
-    rescue
-      cart = Cart.create(user_id: current_user.id ||= 0)
+      Cart.find(session[:cart_id].nil? ? 0 : session[:cart_id])
+    rescue ActiveRecord::RecordNotFound
+      cart = Cart.create(user_id: user_signed_in? ? current_user.id : 0)
       session[:cart_id] = cart.id
       cart
     end

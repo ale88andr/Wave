@@ -3,7 +3,7 @@
     - cart = get_current_cart
     %h2.subheader Корзина заказов(позиций: #{cart.orders.size})
     %p.lead
-      - if cart.user.name.presence
+      - if cart.try(:user)
         = "Здраствуйте, #{cart.user.name.capitalize}, Вы заказали следующие товарные позиции :"
       - else
         Ваш заказ содержит следующие товарные позиции :

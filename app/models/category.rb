@@ -45,6 +45,10 @@ class Category < ActiveRecord::Base
     products.page(current_page).per(per_page)
   end
 
+  def facturers
+    entities.select(:manufacturer_id).uniq
+  end
+
   def total_entity_count
     subcategories.to_a.sum { |subcategory| subcategory.entities.count }
   end
