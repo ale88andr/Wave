@@ -1,8 +1,14 @@
 .large-5.columns
 = form_for [:backend, @unit] do |f|
+  %p.required-fields.header
+    %b Поля помеченные знаком ( * ), необходимо заполнить!
   .row.collapse
     .small-4.large-3.columns
-      %span.prefix= f.label :param, "Значение единицы"
+      %span.prefix= f.label :param, "* Значение единицы"
     .small-8.large-9.columns
       = f.text_field :param, :autofocus => true, placeholder: 'Введите значение'
+    .large-12
+      %p.explanation.subheader
+        %b &#167; Созданная единица может быть привязанна к аттрибуту при его создании
+        %hr
     %div= f.submit locals[:button_label], class: "button radius"

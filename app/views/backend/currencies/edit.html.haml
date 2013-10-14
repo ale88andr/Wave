@@ -2,7 +2,9 @@
 %h4.subheader= "Изменения курса валют '#{@currency.name}' :"
 %br
 = form_for [:backend, @currency], html:{ class: "custom" } do |f|
-  .label.secondary Введите стоимость валюты за 100$
+  %p.required-fields.header
+    %b Поля помеченные знаком ( * ), необходимо заполнить!
+  .label.secondary * Введите стоимость валюты за 1$ :
   .row.collapse
     .large-2.small-3.columns
       %span.prefix= @currency.name

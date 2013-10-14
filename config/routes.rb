@@ -27,7 +27,7 @@ Wave::Application.routes.draw do
 
   resources :profiles, only: :show
   resources :categories, only: [:index, :show] do
-    resources :manufacturers, only: [:index, :show]
+    resources :manufacturers, :technologies, only: [:index, :show]
     resources :entities, only: [:index, :show], :path => "product" do
       resources :discussions, :only => [:create]
     end

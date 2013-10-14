@@ -16,3 +16,8 @@
 //= require_tree .
 
 $(function(){ $(document).foundation(); });
+
+tinymce.init({
+  selector: "textarea",
+  height: "200"
+});

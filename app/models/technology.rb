@@ -15,4 +15,6 @@ class Technology < ActiveRecord::Base
   mount_uploader :label, LabelUploader
 
   validates :name, presence: { message: 'Это поле должно быть заполненно!' }, length: { maximum: 100, too_long: 'Слишком длинное название!' }
+
+  scope :category_technologies, lambda { |category_id| joins(:entities).where("category_id = ?", category_id).uniq }
 end

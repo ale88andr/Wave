@@ -1,8 +1,10 @@
 = form_for [:backend, @attribute], html:{ class: "custom" } do |f|
+  %p.required-fields.header
+    %b Поля помеченные знаком ( * ), необходимо заполнить!
   .large-6.columns
     .row.collapse
       .small-4.large-3.columns
-        %span.prefix= f.label :name, "Наименование аттрибута"
+        %span.prefix= f.label :name, "* Наименование аттрибута"
       .small-8.large-9.columns
         = f.text_field :name, :autofocus => true, placeholder: "Введите название аттрибута"
   .large-6.columns
@@ -11,5 +13,9 @@
         = f.collection_select :unit_id, get_units, :id, :param, class: "small secondary radius button dropdown", include_blank: 'Нет', selected: @attribute.unit_id
       .large-9.columns
         %span.postfix= f.label :unit_id, "Выберите единицу измерения аттрибута:"
+  .large-12
+    %p.explanation.subheader
+      %b &#167; Созданный аттрибут будет доступен при создании или редактировании категорий, если выбранна единица измерения она отображается в скобках после аттрибута
+      %hr
   %br
   %div= f.submit locals[:button_label], class: "button radius"

@@ -25,6 +25,10 @@
       = javascript_include_tag "application"
 
     = render "common/footer"
+    / development params helper
     = debug(params) if Rails.env.development?
+    / popup widgets
     = render "common/cart"
     = render "common/signin_widget"
+    / WISIWIG editor
+    = javascript_include_tag "tinymce/tinymce.min"

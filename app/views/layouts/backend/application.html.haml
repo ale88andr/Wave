@@ -24,6 +24,9 @@
         .small-9.large-10.columns
           = yield
 
+      / WISIWIG editor
+      = javascript_include_tag "tinymce/tinymce.min"
+      / init js Foundation4 features
       = javascript_include_tag "application"
 
     = render "common/footer"

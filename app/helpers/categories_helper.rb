@@ -10,4 +10,8 @@ module CategoriesHelper
 	def exchange price
 		'$ ' + (price / Currency.last.ratio).round(2).to_s
 	end
+
+	def get_category_technology category_id
+		Technology.category_technologies(category_id)
+	end
 end

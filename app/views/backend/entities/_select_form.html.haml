@@ -5,4 +5,8 @@
         %span.prefix= f.label :category_id, "Выберите категорию товара :"
       .large-3.columns.left
         = f.collection_select :category_id, get_categories, :id, :name, class: "small secondary radius button dropdown", disabled: lambda{|category| category.parent_id == 0}
+  .large-12
+    %p.explanation.subheader
+      %b &#167; От выбранной категории товаров будет зависить набор доступных аттрибутов (хфрактеристик) товара
+      %hr
   %div= f.submit "Выбрать", class: "button radius"

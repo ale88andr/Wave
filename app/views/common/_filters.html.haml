@@ -1,0 +1,22 @@
+%h4.subheader Фильтры :
+.section-container.accordion{ data: { :section => "accordion" }}
+  %section.section.active
+    %p.title
+      = link_to "Производители :", "#"
+    .content
+      %ul.side-nav
+        %ul.small-block-grid-2.large-block-grid-2
+          - @category.facturers.each do |obj|
+            %li
+              = link_to image_tag(obj.manufacturer.image_url, size: "60x60"), category_manufacturer_path(@category, obj.manufacturer), class: "th radius"
+              %p.tech-name.subheader= obj.manufacturer.name
+  %section
+    %p.title
+      = link_to "Технологии :", "#"
+    .content
+      %ul.small-block-grid-3.large-block-grid-3
+        - get_category_technology(@category.id).each do |obj|
+          %li
+            %span.tip-bottom{data: {tooltip: ""}, title: obj.description}
+              = link_to image_tag(obj.label_url), category_technologies_path(@category, obj)
+            %p.tech-name.subheader= obj.name

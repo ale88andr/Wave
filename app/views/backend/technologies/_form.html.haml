@@ -1,18 +1,28 @@
 ﻿= form_for [:backend, @technology], html:{ multipart: true, class: "custom" } do |f|
   - if @technology.errors.any?
     = render "common/errors", object: @technology
+  %p.required-fields.header
+    %b Поля помеченные знаком ( * ), необходимо заполнить!
   .large-12
     .row.collapse
       .small-4.large-3.columns
-        %span.prefix= f.label :name, "Наименование технологии :"
+        %span.prefix= f.label :name, "* Наименование технологии :"
       .small-8.large-9.columns
         = f.text_field :name, :autofocus => true, placeholder: "Введите наименование технологии"
   .large-12
+    %p.explanation.subheader
+      %b &#167; Наименование технологии используемой в определённых товарах
+      %hr
+  .large-12
     .row.collapse
-      .small-4.large-3.columns
-        %span.prefix= f.label :description, "Информация о технологии :"
-      .small-8.large-9.columns
+      .small-12.large-12
+        %span.prefix.postfix= f.label :description, "Информация о технологии :"
+      .small-12.large-12
         = f.text_area :description
+  .large-12
+    %p.explanation.subheader
+      %b &#167; Подробное описание технологии
+      %hr
   .large-12
     .row.collapse
       = image_tag(@technology.label_url) if @technology.label?
@@ -20,5 +30,9 @@
         %span.prefix= f.label :label, "Логотип"
       .small-8.large-9.columns
         = f.file_field :label
+  .large-12
+    %p.explanation.subheader
+      %b &#167; Лейбл технологии
+      %hr
   %br
   %div= f.submit locals[:button_label], class: "button radius"

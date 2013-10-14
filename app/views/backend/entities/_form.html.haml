@@ -1,6 +1,8 @@
 = form_for [:backend, @entity], html: { class: "custom" } do |f|
   - if @entity.errors.any?
     = render "common/errors", object: @entity
+  %p.required-fields.header
+    %b Поля помеченные знаком ( * ), необходимо заполнить!
   .large-12
     .row.collapse
       .small-12.large-12.columns
@@ -9,14 +11,22 @@
         %hr
     .row.collapse
       .small-4.large-3.columns
-        %span.prefix= f.label :name, "Наименование товара :"
+        %span.prefix= f.label :name, "* Наименование товара :"
       .small-8.large-9.columns
         = f.text_field :name, :autofocus => true, placeholder: "Наименование товара :"
+    .large-12
+      %p.explanation.subheader
+        %b &#167; Введите наименование товара, по данному параметру можно будет идентифицировать товар
+        %hr
     .row.collapse
-      .small-4.large-3.columns
-        %span.prefix= f.label :description, "Описание товара :"
-      .small-8.large-9.columns
+      .small-12.large-12
+        %span.prefix.postfix= f.label :description, "Описание товара :"
+      .small-12.large-12
         = f.text_area :description, placeholder: "Ведите описание товара :"
+    .large-12
+      %p.explanation.subheader
+        %b &#167; Подробное описание товара или его отличительные особенности
+        %hr
     .row.collapse
       .small-4.large-3.columns
         %span.prefix= f.label :availability, "Количество товара на складе :"
@@ -24,6 +34,10 @@
         = f.text_field :availability, type: :number, maxlength: 10, placeholder: '0', min: 0
       .small-1.large-1.columns.left
         %span.postfix= f.label :guarantee, "единиц"
+    .large-12
+      %p.explanation.subheader
+        %b &#167; Количество единиц в наличии
+        %hr
     .row.collapse
       .small-4.large-3.columns
         %span.prefix= f.label :guarantee, "Гарантийный срок :"
@@ -31,16 +45,27 @@
         = f.text_field :guarantee, type: :number, maxlength: 10, placeholder: '0', min: 0
       .small-1.large-1.columns.left
         %span.postfix= f.label :guarantee, "месяцев"
+    .large-12
+      %p.explanation.subheader
+        %b &#167; Срок на который предоставляется гарантийное обслуживание
+        %hr
     .row.collapse
-      = f.check_box :published
-      = f.label :published, "Доступен ?", checked: true
+      = f.check_box :published, checked: true
+      %span.subheader Доступность
+    .large-12
+      %p.explanation.subheader
+        %b &#167; Будет ли доступен товар в клиентской части каталога
+        %hr
     .row.collapse
       .large-3.columns
         %span.prefix= f.label :manufacturer_id, "Выберите производителя :"
       .large-3.columns.left
         = f.collection_select :manufacturer_id, get_manufacturers, :id, :name, class: "small secondary radius button dropdown"
     = f.hidden_field :category_id, value: @category.id
-
+    .large-12
+      %p.explanation.subheader
+        %b &#167; Привязать изготовителя к товару
+        %hr
     .row.collapse
       .small-12.large-12.columns
         %br
@@ -59,6 +84,10 @@
         %span.prefix= f.label :price_in_currency, "Цена в $ :"
       .small-2.large-2.columns.left
         = f.text_field :price_in_currency, type: :number, maxlength: 10, placeholder: '0.00', step: 0.2, min: 0, disabled: true
+    .large-12
+      %p.explanation.subheader
+        %b &#167; Цена будет дополнительно пересчитана в долларовый эквивалент в соответствии с текущим курсом
+        %hr
     .row.collapse
       .small-3.large-3.columns
         = f.label :price_start_date, "Начало действия цены :"
@@ -66,6 +95,10 @@
       .small-3.large-3.columns.right
         = f.label :price_start_date, "Окончание действия цены :"
         = f.date_select(:price_end_date, start_year: Time.now.year, end_year: Time.now.year + 5, class: "small secondary radius button dropdown", prompt: true)
+    .large-12
+      %p.explanation.subheader
+        %b &#167; Параметры действия цен
+        %hr
     .row.collapse
       .small-12.large-12.columns
         %br
@@ -76,6 +109,10 @@
           = render partial: 'backend/parameters/form', :locals => { :attributes => @category.eav_attributes, :form => f }
         - elsif action_name == 'edit'
           = render partial: 'backend/parameters/edit_form', :locals => { :form => f }
+    .large-12
+      %p.explanation.subheader
+        %b &#167; Аттрибуты будут дополнительно сформированны в краткие характеристики товара в его превью
+        %hr
     .row.collapse
       .small-12.large-12.columns
         %br
@@ -83,13 +120,10 @@
         %hr
       .large-12
         = render partial: 'technology', :locals => { :technologies => getTechnologies, :form => f }
-      %br
-    .row.collapse
-      = image_tag(@entity.image_url) if @entity.image?
-      .small-4.large-3.columns
-        %span.prefix= f.label :image, "Изображение"
-      .small-8.large-9.columns
-        = f.file_field :image
+    .large-12
+      %p.explanation.subheader
+        %b &#167; Позволяет отметить особую технологию, характеризующую товар
+        %hr
   %br
   %br
   %div= f.submit locals[:button_label], class: "button radius"
