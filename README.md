@@ -1,27 +1,30 @@
-== WAVE
-it's description for rails application called **Wave**
-	demo available on  http://wa-ve.herokuapp.com/
-	privileged user: *_probe*
-	user password:   *Pa$$w0rd*
+## Information WAVE
+it's description for rails application called 
+#### Wave
+* demo available on  http://wa-ve.herokuapp.com/
+* `privileged user:` *_probe*
+* `user password:`   *Pa$$w0rd*
+
+## Scratch
 	
-code example
-  controllers (https://github.com/ale88andr/Wave/tree/master/app/controllers, "here ->")
-  models (https://github.com/ale88andr/Wave/tree/master/app/models, "here ->")
-  views (https://github.com/ale88andr/Wave/tree/master/app/views, "here ->")
-  routes (https://github.com/ale88andr/Wave/tree/master/config/routes.rb, "here ->")
+### Code examples
+* [Controllers] (https://github.com/ale88andr/Wave/tree/master/app/controllers)
+* [Models] (https://github.com/ale88andr/Wave/tree/master/app/models)
+* [Views] (https://github.com/ale88andr/Wave/tree/master/app/views)
+* [Routes] (https://github.com/ale88andr/Wave/tree/master/config/routes.rb)
   
-test example
-  Rspec (https://github.com/ale88andr/Wave/tree/master/spec, "here ->")
-  Cucumber (https://github.com/ale88andr/Wave/tree/master/features, "here ->")
+### Test examples
+* [Rspec] (https://github.com/ale88andr/Wave/tree/master/spec)
+* [Cucumber] (https://github.com/ale88andr/Wave/tree/master/features)
   
-== Diagram
+## Database Diagram
 
-![DB diagram](https://github.com/ale88andr/Wave/blob/master/db/Diagram_EAV.png "DB diagram")
+![DB diagram](https://raw.github.com/ale88andr/Wave/master/db/Diagram_EAV.png)
 
-== Ierarchy
+## Inside
 
 Current directory structure of Wave
-
+```
   |-- app
   |   |-- assets
   |   |   |-- images
@@ -71,3 +74,4 @@ Current directory structure of Wave
       |   |-- javascripts
       |   `-- stylesheets
       `-- plugins
+```
