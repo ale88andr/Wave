@@ -1,22 +1,22 @@
 ## Information WAVE
-it's description for rails application called 
+it's description for rails application called
 #### Wave
 * demo available on  http://wa-ve.herokuapp.com/
 * `privileged user:` *_probe*
 * `user password:`   *Pa$$w0rd*
 
 ## Scratch
-	
+
 ### Code examples
 * [Controllers] (https://github.com/ale88andr/Wave/tree/master/app/controllers)
 * [Models] (https://github.com/ale88andr/Wave/tree/master/app/models)
 * [Views] (https://github.com/ale88andr/Wave/tree/master/app/views)
 * [Routes] (https://github.com/ale88andr/Wave/tree/master/config/routes.rb)
-  
+
 ### Test examples
 * [Rspec] (https://github.com/ale88andr/Wave/tree/master/spec)
 * [Cucumber] (https://github.com/ale88andr/Wave/tree/master/features)
-  
+
 ## Database Diagram
 
 ![DB diagram](https://raw.github.com/ale88andr/Wave/master/db/Diagram_EAV.png)
@@ -59,7 +59,7 @@ Current directory structure of Wave
   |   |-- factories
   |   |-- models
   |   |-- support
-  |   `-- views  
+  |   `-- views
   |-- test
   |   |-- fixtures
   |   |-- functional
