@@ -17,7 +17,7 @@
             - item.subcategories.each do |subcat|
               &#215
               %span.tip-bottom{data: {tooltip: ""}, title: rescue_if_description_empty(subcat.description)}
-                = link_to "#{subcat.name}", category_path(subcat) 
+                = link_to "#{subcat.name}", category_path(subcat)
               &#8594
               %br
           %hr
@@ -31,10 +31,16 @@
       %ul.small-block-grid-2.large-block-grid-2.general-category
         - @presenter.recent_products.each do |product|
           %li.centered
+            = link_to image_tag(product.image.nil? ? "/img/entity/default.jpg" : product.image.url), category_entity_path(product.category, product), class: "th radius"
             = link_to product.name, category_entity_path(product.category, product)
             %hr.dash
-            %p.price
+            %span.price
               = product.price
               = product.currency.abbreviation
+            %ul.button-group.radius.even-2
+              %li
+                = link_to "Подробнее", category_entity_path(product.category, product), class: "button secondary small"
+              %li
+                = link_to "Заказать", orders_path(entity_id: product), class: "button secondary small"
   .small-4.large-3.columns.large-offset-1
     = render 'common/right_widget'

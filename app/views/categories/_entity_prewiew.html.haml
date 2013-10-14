@@ -3,7 +3,7 @@
     %li
       %ul.pricing-table
         %span.has-tip{data: {tooltip: ""}, title: entity.characteristics}
-          = link_to pic(entity), category_entity_path(@category, entity)
+          = link_to pic(entity), category_entity_path(@category, entity), class: "th radius"
         %li.bullet-item
           %b= link_to entity.name, category_entity_path(@category, entity)
         %li.bullet-item
