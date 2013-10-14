@@ -16,7 +16,7 @@ test example
   
 == Diagram
 
-![DB diagram](https://github.com/ale88andr/Wave/blob/master/db/Diagram_EAV.png "DB diagram")
+![DB diagram](https://raw.github.com/ale88andr/Wave/blob/master/db/Diagram_EAV.png)
 
 == Ierarchy
 
