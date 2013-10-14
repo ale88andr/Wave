@@ -1,11 +1,11 @@
-== WAVE
-it's description for rails application called **Wave**
-	demo available on  http://wa-ve.herokuapp.com/
-	privileged user: *_probe*
-	user password:   *Pa$$w0rd*
+## Information WAVE
+it's description for rails application called *Wave*
+demo available on  http://wa-ve.herokuapp.com/
+privileged user: *_probe*
+user password:   *Pa$$w0rd*
 	
-code example
-  controllers (https://github.com/ale88andr/Wave/tree/master/app/controllers, "here ->")
+### Code examples
+* [Controllers] (https://github.com/ale88andr/Wave/tree/master/app/controllers)
   models (https://github.com/ale88andr/Wave/tree/master/app/models, "here ->")
   views (https://github.com/ale88andr/Wave/tree/master/app/views, "here ->")
   routes (https://github.com/ale88andr/Wave/tree/master/config/routes.rb, "here ->")
