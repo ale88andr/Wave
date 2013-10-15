@@ -91,7 +91,7 @@ class Entity < ActiveRecord::Base
   scope :by_rate, lambda { |top = true| chronology.order("rate #{top ? 'ASC' : 'DESC'}") }
   scope :unpublished, where("published: false")
   scope :price_range, lambda { |range_up = 0, range_to = 999999| where(price: range_up..range_to) }
-  scope :price, lambda { |cheap| order("price #{cheap ? 'ASC' : 'DESC'}").chronology }
+  scope :price, lambda { |cheap = nil| order("price #{cheap ? 'ASC' : 'DESC'}").chronology }
   scope :popular, chronology.order("views DESC")
 
   def set_characteristics_from_parameters_attributes
@@ -100,6 +100,16 @@ class Entity < ActiveRecord::Base
 
   def set_currency
     self.currency_id = self.bind_price ? Currency.first.id : Currency.last.id
+  end
+
+  def self.get_products_by_option option=nil
+    category_products = case option
+      when 'newest'   then self.newest_by(1.month.ago)
+      when 'popular'  then self.popular
+      when 'cheap'    then self.price(true)
+      when 'hight'    then self.price
+      else self.chronology
+    end
   end
 
   private

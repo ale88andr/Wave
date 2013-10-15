@@ -34,8 +34,28 @@ ru:
         ph_name: "Введите имя"
         ph_pass: "Введите пароль"
         remember_me: "Длительная сессия"
-
-  ru:
+  views: 
+    pagination: 
+      first: "&#8656; Первая"
+      last: "Последняя &#8658;"
+      previous: "&#8592; Сюда"
+      next: "Туда &#8594;"
+      truncate: "&#8660;"
+  helpers:
+    select:
+      prompt: ! 'Выберите: '
+    submit:
+      create: Создать %{model}
+      submit: Сохранить %{model}
+      update: Сохранить %{model}
+    page_entries_info:
+      one_page:
+        display_entries:
+          zero: "Не найденно %{entry_name}"
+          one: "Показан <b>1</b> %{entry_name}"
+          other: "Показанны <b>все %{count}</b>"
+      more_pages:
+        display_entries: "Показанны %{entry_name} <b>%{first}&nbsp;-&nbsp;%{last}</b> из <b>%{total}</b>"
   date:
     abbr_day_names:
     - Вс
@@ -197,13 +217,6 @@ ru:
         many: ! '%{model}: сохранение не удалось из-за %{count} ошибок'
         one: ! '%{model}: сохранение не удалось из-за %{count} ошибки'
         other: ! '%{model}: сохранение не удалось из-за %{count} ошибки'
-  helpers:
-    select:
-      prompt: ! 'Выберите: '
-    submit:
-      create: Создать %{model}
-      submit: Сохранить %{model}
-      update: Сохранить %{model}
   number:
     currency:
       format:

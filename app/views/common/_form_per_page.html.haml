@@ -1,0 +1,8 @@
+= form_tag "#", class: "custom" do
+  .large-12
+    .row.collapse
+      .large-7.columns
+        %span.prefix= label_tag :limit, "Количество товаров на странице : "
+      .large-2.columns.left
+        = select_tag :limit, options_for_select([5, 10, 15, 20], selected: params[:limit] || 5), class: "small secondary dropdown", id: 'per_page_selector'
+      .large-3.columns.left= link_to "Показать", category_path(@presenter.current_category.id),class: "secondary button small", id: 'per_page_link'

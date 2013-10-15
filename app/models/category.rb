@@ -32,21 +32,22 @@ class Category < ActiveRecord::Base
   scope :head, where("parent_id = ?", '0')
   scope :order_by_parent, by_parent(subcat)
 
-  scope :products, includes(:entities).merge(Entity.chronology)
-  scope :products_price_from, lambda { |cheap = true| includes(:entities).merge(Entity.price(cheap)) }
-  scope :last_by, includes(:entities).merge(Entity.newest_by)
-  scope :popular, includes(:entities).merge(Entity.popular)
+  # slow
 
-  def self.get_products_category_by_option option=nil, current_page=nil, per_page=5
-    products = case option
-      when 'newest'   then self.last_by(1.month.ago)
-      when 'popular'  then self.popular
-      when 'cheaper'  then self.products_price_from
-      when 'hight'    then self.products_price_from(cheap = false)
-      else self.products
-    end
-    products.page(current_page).per(per_page)
-  end
+  # scope :products, includes(:entities).merge(Entity.chronology)
+  # scope :products_price_from, lambda { |cheap = true| includes(:entities).merge(Entity.price(cheap)) }
+  # scope :last_by, includes(:entities).merge(Entity.newest_by)
+  # scope :popular, includes(:entities).merge(Entity.popular)
+
+  # def self.get_products_category_by_option option=nil
+  #   category_products = case option
+  #     when 'newest'   then self.last_by(1.month.ago)
+  #     when 'popular'  then self.popular
+  #     when 'cheaper'  then self.products_price_from
+  #     when 'hight'    then self.products_price_from(cheap = false)
+  #     else self.products
+  #   end
+  # end
 
   def facturers
     entities.select(:manufacturer_id).uniq

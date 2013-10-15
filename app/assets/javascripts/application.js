@@ -17,7 +17,14 @@
 
 $(function(){ $(document).foundation(); });
 
-tinymce.init({
-  selector: "textarea",
-  height: "200"
+// tinymce.init({
+//   selector: "textarea",
+//   height: "200"
+// });
+
+$(function(){
+  $('#per_page_selector').on('change', function(){
+  	href = $('#per_page_link').attr('href')
+    $('#per_page_link').attr('href', href + '/limit/' + this.value);
+  });
 });

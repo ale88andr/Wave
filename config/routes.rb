@@ -32,6 +32,7 @@ Wave::Application.routes.draw do
       resources :discussions, :only => [:create]
     end
     get '/:option', action: :show, on: :member
+    get '/limit/:limit', action: :show, on: :member
   end
 
   resources :orders, :carts

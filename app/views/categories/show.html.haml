@@ -1,30 +1,38 @@
-- provide(:title, "Просмотр категории #{@category.name}")
+- provide(:title, "Просмотр категории #{@presenter.current_category.name}")
 .row.collapse
   .large-9.small-9.columns
-    %h4.subheader= link_to @category.parent.name, category_path(@category.parent) if @category.try(:parent)
-    %h4.subheader= @category.name
-    - if @category.try(:parent)
-      %span.subcategory= "Показанно товаров: #{@category.entities.size}"
+    %h4.subheader= link_to @presenter.current_category.parent.name, category_path(@presenter.current_category.parent) if @presenter.current_category.try(:parent)
+    %h4.subheader= @presenter.current_category.name
+    - if @presenter.current_category.try(:parent)
+      %span.subcategory= "Показанно товаров: #{@presenter.current_category.entities.size}"
       %hr
-      %label= link_to "#{@category.name} -> Все производители ", category_manufacturers_path(@category)
+      %label= link_to "#{@presenter.current_category.name} -> Все производители ", category_manufacturers_path(@presenter.current_category.id)
       %hr
-      %ul#drop.f-dropdown.content.open{ data: { dropdown_content: '' } }
-        %li= link_to "Новинки", category_path(@category) + '/newest'
-        %li= link_to "От дешёвых к дорогим", category_path(@category) + '/cheap'
-        %li= link_to "От дорогих к дешёвым", category_path(@category) + '/hight'
-        %li= link_to "Популярные", category_path(@category) + '/popular'
-      = link_to "Сортировать", '#', class: "small secondary radius button dropdown", data: { dropdown: 'drop' }
-      - ent = @category.entities
-      - unless ent.empty?
-        /= paginate ent
-        = render partial: 'entity_prewiew', locals: { entity_category_collection: ent }
-        /= paginate ent
+      .large-3.columns.left
+        %ul#drop.f-dropdown.content.open{ data: { dropdown_content: '' } }
+          %li= link_to "Новинки", category_path(@presenter.current_category) + '/newest'
+          %li= link_to "От дешёвых к дорогим", category_path(@presenter.current_category) + '/cheap'
+          %li= link_to "От дорогих к дешёвым", category_path(@presenter.current_category) + '/hight'
+          %li= link_to "Популярные", category_path(@presenter.current_category) + '/popular'
+        = link_to "Сортировать", '#', class: "small secondary radius button dropdown", data: { dropdown: 'drop' }
+      .large-6.columns.right
+        = render "common/form_per_page"
+      %br
+      %br
+      %br
+      - if @presenter.category_entities?
+        .label.large-centered= page_entries_info @presenter.entities, entry_name: 'товары'
+        %br
+        %br
+        = paginate @presenter.entities, :left => 3, :right => 3
+        = render partial: 'entity_prewiew', locals: { collection: @presenter.entities }
+        = paginate @presenter.entities, :left => 3, :right => 3
       - else
         %span.alert В данной категории товары пока недоступны!
     - else
-      %span= "Содержит подкатегорий: #{@category.subcategories.size}"
+      %span= "Содержит подкатегорий: #{@presenter.current_category.subcategories.size}"
       %hr
-      - @category.subcategories.each do |subcat|
+      - @presenter.current_category.subcategories.each do |subcat|
         = link_to "#{subcat.name} (#{subcat.entities.size})", category_path(subcat)
         %br
   .large-2.small-2.columns
